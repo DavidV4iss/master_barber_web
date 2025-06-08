@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import NavbarBarber from '../../Components/NavbarBarber';
+import API from '../../api/api';
+const API_URL = process.env.API_URL || "http://localhost:8080";
 
 export default function GestionReservas() {
     const [reservas, setReservas] = useState([]);
@@ -20,26 +22,26 @@ export default function GestionReservas() {
     const email = usuario.email;
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/GetReservas/barbero/${id}`)
+        API.get(`/GetReservas/barbero/${id}`)
             .then(res => setReservas(res.data))
             .catch(err => console.error('Error al obtener reservas:', err));
 
-        axios.get(`http://localhost:8080/traerUsuario/${email}`)
+        API.get(`/traerUsuario/${email}`)
             .then(res => setBarber(res.data[0]))
             .catch(err => console.error('Error al obtener datos del barbero:', err));
 
-        axios.get('http://localhost:8080/GetServicios')
+        API.get('/GetServicios')
             .then(res => setServicios(res.data))
             .catch(err => console.error('Error al obtener servicios:', err));
 
-        axios.get('http://localhost:8080/GetClientes')
+        API.get('/GetClientes')
             .then(res => setClientes(res.data))
             .catch(err => console.error('Error al obtener clientes:', err));
     }, []);
 
     const handleAccept = (id) => {
         setIsLoadingAccept(true);
-        axios.patch(`http://localhost:8080/UpdateReservasEstado/${id}`, { estado: 'Aceptada' })
+        API.patch(`/UpdateReservasEstado/${id}`, { estado: 'Aceptada' })
             .then(() => {
                 setReservas(prev =>
                     prev.map(res => res.id_reserva === id ? { ...res, estado: 'Aceptada' } : res)
@@ -59,7 +61,7 @@ export default function GestionReservas() {
 
     const handleCancel = (id) => {
         setIsLoadingCancel(true);
-        axios.patch(`http://localhost:8080/UpdateReservasEstado/${id}`, { estado: 'Cancelada' })
+        API.patch(`/UpdateReservasEstado/${id}`, { estado: 'Cancelada' })
             .then(() => {
                 setReservas(prev =>
                     prev.map(res => res.id_reserva === id ? { ...res, estado: 'Cancelada' } : res)
@@ -73,7 +75,7 @@ export default function GestionReservas() {
 
     const handleFinalize = (id) => {
         setIsLoadingFinal(true);
-        axios.patch(`http://localhost:8080/UpdateReservasEstado/${id}`, { estado: 'finalizada' })
+        API.patch(`/UpdateReservasEstado/${id}`, { estado: 'finalizada' })
             .then(() => {
                 setReservas(prev =>
                     prev.map(res => res.id_reserva === id ? { ...res, estado: 'finalizada' } : res)
@@ -85,7 +87,7 @@ export default function GestionReservas() {
     };
 
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:8080/DeleteReserva/${id}`)
+        API.delete(`/DeleteReserva/${id}`)
             .then(() => {
                 setReservas(prev => prev.filter(res => res.id_reserva !== id));
                 if (cancelTimers[id]) {
@@ -112,7 +114,7 @@ export default function GestionReservas() {
                 nombre: cliente.nombre_usuario,
                 imagen: (
                     <img
-                        src={`http://localhost:8080/perfil/${cliente.Foto}`}
+                        src={`${API_URL}/perfil/${cliente.Foto}`}
                         alt="Foto de Perfil"
                         className="img-fluid rounded-circle"
                         style={{ width: '100px', height: '100px', objectFit: 'cover' }}

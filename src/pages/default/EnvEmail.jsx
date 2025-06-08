@@ -4,6 +4,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import API from "../../api/api";
 
 
 
@@ -21,7 +22,7 @@ export default function EnvEmail() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:8080/EnvEmail", user);
+            const res = await API.post("/EnvEmail", user);
             if (res.status === 200) {
                 Swal.fire({
                     timer: 9000,

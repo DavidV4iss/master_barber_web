@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import API from '../api/api';
+const API_URL = process.env.API_URL || "http://localhost:8080";
 
 export default function NavbarUserIndex() {
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ export default function NavbarUserIndex() {
 
   const fetchNotificaciones = async (mostrarToastInicial = false) => {
     try {
-      const res = await axios.get(`http://localhost:8080/GetNotificaciones/${user.id_usuario}`);
+      const res = await API.get(`/GetNotificaciones/${user.id_usuario}`);
       if (mostrarToastInicial && res.data.length > 0) {
         const ultima = res.data[0];
         showToast(
@@ -56,7 +58,7 @@ export default function NavbarUserIndex() {
 
       const interval = setInterval(async () => {
         try {
-          const res = await axios.get(`http://localhost:8080/GetNotificaciones/${user.id_usuario}`);
+          const res = await API.get(`/GetNotificaciones/${user.id_usuario}`);
           setNotificaciones(res.data);
         } catch (err) {
           console.error("Error al actualizar notificaciones:", err);
@@ -70,10 +72,10 @@ export default function NavbarUserIndex() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/traerUsuario/${email}`);
+        const res = await API.get(`/traerUsuario/${email}`);
         setUser(res.data[0]);
         if (res.data[0].Foto) {
-          setImagePreview(`http://localhost:8080/perfil/${res.data[0].Foto}`);
+          setImagePreview(`${API_URL}/perfil/${res.data[0].Foto}`);
         }
       } catch (err) {
         console.log("Error al obtener los datos:", err);
@@ -166,7 +168,7 @@ export default function NavbarUserIndex() {
 
   const handleNotificationClick = async () => {
     try {
-      const res = await axios.get(`http://localhost:8080/GetNotificaciones/${user.id_usuario}`);
+      const res = await API.get(`/GetNotificaciones/${user.id_usuario}`);
       handleNotification(res.data);
       setNotificaciones(res.data);
     } catch (err) {
@@ -177,7 +179,7 @@ export default function NavbarUserIndex() {
 
   const deleteNotification = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/DeleteNotificacion/${id}`);
+      await API.delete(`/DeleteNotificacion/${id}`);
       Swal.fire({
         title: "Notificación eliminada",
         text: "La notificación ha sido eliminada correctamente.",

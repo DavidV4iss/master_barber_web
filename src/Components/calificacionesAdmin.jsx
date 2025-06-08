@@ -4,6 +4,8 @@ import Slider from "react-slick";
 import { Modal, Button } from 'react-bootstrap';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+const API_URL = process.env.API_URL || "http://localhost:8080";
+import API from '../api/api';
 
 export default function CalificacionesAdmin() {
     const [calificaciones, setCalificaciones] = useState([]);
@@ -14,7 +16,7 @@ export default function CalificacionesAdmin() {
     useEffect(() => {
         const fetchCalificaciones = async () => {
             try {
-                const res = await axios.get("http://localhost:8080/traerCalificaciones");
+                const res = await API.get("/traerCalificaciones");
                 setCalificaciones(res.data);
             } catch (err) {
                 console.log("Error al obtener las calificaciones:", err);
@@ -26,7 +28,7 @@ export default function CalificacionesAdmin() {
     useEffect(() => {
         const fetchUsuarios = async () => {
             try {
-                const res = await axios.get("http://localhost:8080/traerUsuarios");
+                const res = await API.get("/traerUsuarios");
                 setUsuarios(res.data);
             } catch (err) {
                 console.log("Error al obtener los usuarios:", err);
@@ -68,7 +70,7 @@ export default function CalificacionesAdmin() {
                                 >
                                     <div className="card-body text-center">
                                         <img
-                                            src={`http://localhost:8080/perfil/${usuario?.Foto}`}
+                                            src={`${API_URL}/perfil/${usuario?.Foto}`}
                                             className="img-fluid rounded-circle mb-3 shadow mx-auto d-block"
                                             style={{ width: "120px", height: "120px", objectFit: "cover", border: "4px solid #dc3545" }}
                                             onError={(e) => (e.target.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png")}
@@ -93,7 +95,7 @@ export default function CalificacionesAdmin() {
                     </Modal.Header>
                     <Modal.Body className='bg-dark text-white text-center '>
                         <img
-                            src={`http://localhost:8080/perfil/${usuarios.find(user => user.id_usuario === selectedCalificacion.usuario_id)?.Foto}`}
+                            src={`${API_URL}/perfil/${usuarios.find(user => user.id_usuario === selectedCalificacion.usuario_id)?.Foto}`}
                             className="img-fluid rounded-circle mb-3"
                             style={{ width: "90px", height: "90px", objectFit: "cover", border: "3px solid #dc3545" }}
                         />

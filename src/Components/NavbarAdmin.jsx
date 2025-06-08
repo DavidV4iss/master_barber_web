@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import API from '../api/api';
+const API_URL = process.env.API_URL || "http://localhost:8080";
+
 
 
 
@@ -22,10 +25,10 @@ export default function NavbarAdmin() {
   useEffect(() => {
     const fetchAdmin = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/traerUsuario/${email}`);
+        const res = await API.get(`/traerUsuario/${email}`);
         setAdmin(res.data[0]);
         if (res.data[0].Foto) {
-          setImagePreview(`http://localhost:8080/perfil/${res.data[0].Foto}`);
+          setImagePreview(`${API_URL}/perfil/${res.data[0].Foto}`);
         }
       } catch (err) {
         console.log("Error al obtener los datos:", err);

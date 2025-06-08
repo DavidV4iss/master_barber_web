@@ -4,6 +4,8 @@ import CarrouselShop from '../../Components/CarrouselShop'
 import CalificacionesAdmin from '../../Components/CalificacionesAdmin'
 import Darkandlight from "../../Components/Dark and light";
 import axios from 'axios'
+import API from "../../api/api";
+const API_URL = process.env.API_URL || "http://localhost:8080";
 
 export default function Index() {
     const [theme] = useState(() => {
@@ -19,7 +21,7 @@ export default function Index() {
     useEffect(() => {
         const fetchBarberos = async () => {
             try {
-                const res = await axios.get("http://localhost:8080/GetBarberos");
+                const res = await API.get("/GetBarberos");
                 setBarberos(res.data);
             } catch (err) {
                 console.log("Error al obtener los datos:", err);
@@ -212,7 +214,7 @@ export default function Index() {
                         {barberos.map((barbero) => (
                             <div className="col" key={barbero.id_usuario}>
                                 <div class="card bg-dark mt-5">
-                                    <img src={`http://localhost:8080/imagesBarbero/${barbero.Foto}`} class="card-img-top img-fluid" alt="..." />
+                                    <img src={`${API_URL}/imagesBarbero/${barbero.Foto}`} class="card-img-top img-fluid" alt="..." />
                                     <div class="card-body">
                                         <h5 class="card-title text-danger text-center bebas fs-2 m-2">{barbero.nombre_usuario}</h5>
                                         <p class="card-text text-white text-center mt-3 m-3">{barbero.descripcion}</p>

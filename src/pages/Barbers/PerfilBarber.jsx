@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import API from '../../api/api';
+const API_URL = process.env.API_URL || "http://localhost:8080";
 
 
 export default function PerfilBarber() {
@@ -21,10 +23,10 @@ export default function PerfilBarber() {
   useEffect(() => {
     const fetchBarber = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/traerUsuario/${email}`);
+        const res = await API.get(`/traerUsuario/${email}`);
         setBarber(res.data[0]);
         if (res.data[0].Foto) {
-          setImagePreview(`http://localhost:8080/imagesBarbero/${res.data[0].Foto}`);
+          setImagePreview(`${API_URL}/imagesBarbero/${res.data[0].Foto}`);
         }
       } catch (err) {
         console.log("Error al obtener los datos:", err);
@@ -92,7 +94,7 @@ export default function PerfilBarber() {
 
     try {
       await axios.post(
-        `http://localhost:8080/actualizarBarbero/${email}`,
+        `${API_URL}/actualizarBarbero/${email}`,
         formData
       );
       Swal.fire({
@@ -130,7 +132,7 @@ export default function PerfilBarber() {
           <div className="row justify-content-center align-items-center">
             <div className="col col-lg-6 bi-text-lg-center ">
               <img
-                src={imagePreview || `http://localhost:8080/imagesBarbero/${barber.Foto}`}
+                src={imagePreview || `${API_URL}/imagesBarbero/${barber.Foto}`}
                 alt="Imagen de perfil"
                 className={`img-fluid rounded-circle contenido3 zoomhover2 ${imagePreview ? "fade-in" : ""
                   }`}

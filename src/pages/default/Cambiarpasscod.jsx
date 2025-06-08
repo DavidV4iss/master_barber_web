@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
+import API from '../../api/api';
 
 
 export default function Cambiarpasscod() {
@@ -47,7 +48,7 @@ export default function Cambiarpasscod() {
         e.preventDefault();
         const verificaCode = iNPU.join('');
         try {
-            const res = await axios.post(`http://localhost:8080/cambiarpasscod`, { ...user, verificaCode });
+            const res = await API.post(`/cambiarpasscod`, { ...user, verificaCode });
             if (res.status === 200) {
                 Swal.fire({
                     timer: 9000,

@@ -9,6 +9,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
+import API from '../../api/api';
+const API_URL = process.env.API_URL || "http://localhost:8080";
 
 
 const StyledDatePicker = styled(DatePicker)`
@@ -60,17 +62,17 @@ export default function Reserva() {
     const prevStep = () => setCurrentStep((prev) => prev - 1);
 
     useEffect(() => {
-        axios.get('http://localhost:8080/GetBarberos')
+        API.get('/GetBarberos')
             .then(res => setBarberos(res.data))
             .catch(err => console.error(err));
 
         if (barberoId) {
-            axios.get(`http://localhost:8080/GetReservas/barbero/${barberoId}`)
+            API.get(`/GetReservas/barbero/${barberoId}`)
                 .then(res => setHorasOcupadas(res.data.map(r => new Date(r.fecha))))
                 .catch(err => console.error(err));
         }
 
-        axios.get('http://localhost:8080/GetServicios')
+        API.get('/GetServicios')
             .then(res => setServicios(res.data))
             .catch(err => console.error(err));
     }, [barberoId]);
@@ -94,7 +96,7 @@ export default function Reserva() {
         const formattedDate = moment(date).format('YYYY-MM-DD HH:mm:ss');
 
         try {
-            await axios.post('http://localhost:8080/CrearReservas', {
+            await API.post('/CrearReservas', {
                 cliente_id: id,
                 barbero_id: barberoId,
                 servicio: service,
@@ -198,7 +200,7 @@ export default function Reserva() {
                                                     </h5>
                                                     <div className='card-body d-flex flex-column align-items-center text-center'>
                                                         <img
-                                                            src={`http://localhost:8080/imagesBarbero/${barbero.Foto}`}
+                                                            src={`${API_URL}/imagesBarbero/${barbero.Foto}`}
                                                             className='card-img-top rounded-3 img-fluid'
                                                             alt={barbero.nombre_usuario}
                                                             style={{ maxHeight: '200px', objectFit: 'cover' }}

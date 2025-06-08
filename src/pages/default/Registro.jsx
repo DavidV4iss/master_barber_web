@@ -4,6 +4,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import API from '../../api/api'
 
 
 export default function Registro() {
@@ -28,7 +29,7 @@ export default function Registro() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:8080/registrar", user);
+            const res = await API.post("/registrar", user);
             if (res.status === 200) {
                 Swal.fire({
                     title: 'Cuenta creada',

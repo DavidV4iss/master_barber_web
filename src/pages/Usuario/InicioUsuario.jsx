@@ -6,6 +6,7 @@ import Rating from 'react-rating-stars-component';
 import ReservaCliente from './ReservaCliente';
 import CalificacionesUser from '../../Components/CalificacionesUser';
 import 'animate.css';
+import API from '../../api/api';
 
 export default function InicioUsuario() {
   const [user, setUser] = useState({});
@@ -20,7 +21,7 @@ export default function InicioUsuario() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/traerUsuario/${email}`);
+        const res = await API.get(`/traerUsuario/${email}`);
         setUser(res.data[0]);
       } catch (err) {
         console.log("Error al obtener los datos:", err);
@@ -46,7 +47,7 @@ export default function InicioUsuario() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:8080/Createcalificaciones", nuevaCalificacion);
+      const res = await API.post("/Createcalificaciones", nuevaCalificacion);
       if (res.status === 200) {
         Swal.fire({
           title: "Calificación enviada",

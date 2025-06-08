@@ -5,6 +5,8 @@ import { Modal, Button } from 'react-bootstrap';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Swal from 'sweetalert2';
+const API_URL = process.env.API_URL || "http://localhost:8080";
+import API from '../api/api';
 
 export default function CalificacionesUser({ userId }) {
     const [calificaciones, setCalificaciones] = useState([]);
@@ -15,7 +17,7 @@ export default function CalificacionesUser({ userId }) {
     useEffect(() => {
         const fetchCalificaciones = async () => {
             try {
-                const res = await axios.get(`http://localhost:8080/traerCalificacionesUsuario/${userId}`);
+                const res = await API.get(`/traerCalificacionesUsuario/${userId}`);
 
                 setCalificaciones(res.data);
             } catch (err) {
@@ -28,7 +30,7 @@ export default function CalificacionesUser({ userId }) {
     useEffect(() => {
         const fetchUsuarios = async () => {
             try {
-                const res = await axios.get("http://localhost:8080/traerUsuarios");
+                const res = await API.get("/traerUsuarios");
                 setUsuarios(res.data);
             } catch (err) {
                 console.log("Error al obtener los usuarios:", err);
@@ -54,7 +56,7 @@ export default function CalificacionesUser({ userId }) {
             if (!confirm.isConfirmed) {
                 return;
             }
-            const res = await axios.delete(`http://localhost:8080/DeleteCalificaciones/${id}`);
+            const res = await API.delete(`/DeleteCalificaciones/${id}`);
             console.log(res);
             if (res.status === 200) {
                 Swal.fire({
@@ -111,7 +113,7 @@ export default function CalificacionesUser({ userId }) {
                             >
                                 <div className="card-body text-center">
                                     <img
-                                        src={`http://localhost:8080/perfil/${usuario?.Foto}`}
+                                        src={`${API_URL}/perfil/${usuario?.Foto}`}
                                         className="img-fluid rounded-circle mb-3 shadow mx-auto d-block"
                                         style={{ width: "120px", height: "120px", objectFit: "cover", border: "4px solid #dc3545" }}
                                         onError={e => { e.target.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }}
@@ -148,7 +150,7 @@ export default function CalificacionesUser({ userId }) {
                     </Modal.Header>
                     <Modal.Body className='bg-dark text-white text-center '>
                         <img
-                            src={`http://localhost:8080/perfil/${usuarios.find(user => user.id_usuario === selectedCalificacion.usuario_id)?.Foto}`}
+                            src={`${API_URL}/perfil/${usuarios.find(user => user.id_usuario === selectedCalificacion.usuario_id)?.Foto}`}
                             className="img-fluid rounded-circle mb-3"
                             style={{ width: "90px", height: "90px", objectFit: "cover", border: "3px solid #dc3545" }}
                         />

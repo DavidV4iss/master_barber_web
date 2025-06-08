@@ -6,6 +6,9 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css/effect-creative';
 import axios from 'axios';
+const API_URL = process.env.API_URL || "http://localhost:8080";
+import API from '../api/api';
+
 
 export default function CarrouselShop() {
     const [images, setImages] = useState([]);
@@ -14,7 +17,7 @@ export default function CarrouselShop() {
     useEffect(() => {
         const fetchImages = async () => {
             try {
-                const res = await axios.get("http://localhost:8080/GetInventario");
+                const res = await API.get("/GetInventario");
                 setImages(res.data);
             } catch (err) {
                 console.log("Error al obtener las calificaciones:", err);
@@ -63,7 +66,7 @@ export default function CarrouselShop() {
                     <SwiperSlide key={carrousel.id}>
                         <div className="card text-center bg-dark">
                             <div className="card-body">
-                                <img src={`http://localhost:8080/ImagesInventario/${carrousel.Foto}`} className='img-fluid ' alt="" />
+                                <img src={`${API_URL}/ImagesInventario/${carrousel.Foto}`} className='img-fluid ' alt="" />
                                 <h5 className="card-title mt-4 antonparabackend text-danger">{carrousel.nombre}</h5>
                                 <p className="card-text text-white mt-4">{carrousel.descripcion_P}</p>
                                 <p className="card-text text-white mt-2">Quedan {carrousel.cantidad} Unidades De Este Producto</p>

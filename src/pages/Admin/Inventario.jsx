@@ -4,6 +4,8 @@ import Swal from 'sweetalert2'
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import API from '../../api/api';
+const API_URL = process.env.API_URL || "http://localhost:8080";
 
 export default function Inventario() {
     const [imagePreviewEdit, setImagePreviewEdit] = useState('');
@@ -49,7 +51,7 @@ export default function Inventario() {
             formData.append('foto', producto.foto);
             formData.append('PrecioUnitario', producto.PrecioUnitario);
 
-            const res = await axios.post(`http://localhost:8080/CreateInventario`, formData);
+            const res = await API.post(`/CreateInventario`, formData);
             if (res.status === 200) {
                 Swal.fire({
                     icon: 'success',
@@ -88,7 +90,7 @@ export default function Inventario() {
             formData.append('foto', productoEditar.foto);
             formData.append('PrecioUnitario', productoEditar.PrecioUnitario);
 
-            const res = await axios.put(`http://localhost:8080/UpdateInventario/${productoEditar.id_producto}`, formData);
+            const res = await API.put(`/UpdateInventario/${productoEditar.id_producto}`, formData);
             if (res.status === 200) {
                 Swal.fire({
                     icon: 'success',
@@ -174,7 +176,7 @@ export default function Inventario() {
             if (!confirm.isConfirmed) {
                 return;
             }
-            const res = await axios.delete(`http://localhost:8080/DeleteInventario/${id}`);
+            const res = await API.delete(`/DeleteInventario/${id}`);
             console.log(res);
             if (res.status === 200) {
                 Swal.fire({
@@ -204,8 +206,8 @@ export default function Inventario() {
         const fetchData = async () => {
             try {
                 const [inventarioRes, categoriasRes] = await Promise.all([
-                    axios.get(`http://localhost:8080/GetInventario`),
-                    axios.get(`http://localhost:8080/categorias`),
+                    API.get(`/GetInventario`),
+                    API.get(`/categorias`),
                 ]);
                 setInventario(inventarioRes.data);
                 setCategorias(categoriasRes.data);
@@ -270,7 +272,7 @@ export default function Inventario() {
                                                 <td className='text-center'>{categorias.find(c => c.id_categoria_producto === item.id_categoria_producto)?.categoria}</td>
                                                 <td className='text-center'>{item.proveedor}</td>
                                                 <td className='text-center'>{item.fecha_venta}</td>
-                                                <td className='text-center'><img src={`http://localhost:8080/ImagesInventario/${item.Foto}`} className='img-fluid zoomhover2' style={{ width: '150px', height: '150px', objectFit: 'cover' }} /></td>
+                                                <td className='text-center'><img src={`${API_URL}/ImagesInventario/${item.Foto}`} className='img-fluid zoomhover2' style={{ width: '150px', height: '150px', objectFit: 'cover' }} /></td>
                                                 <td className='text-center'>{item.PrecioUnitario}</td>
                                                 <td>
                                                     <div className="d-flex">
@@ -308,9 +310,9 @@ export default function Inventario() {
                                                     imagePreviewEdit
                                                         ? imagePreviewEdit
                                                         : productoEditar.foto && typeof productoEditar.foto === 'string'
-                                                            ? `http://localhost:8080/ImagesInventario/${productoEditar.foto}`
+                                                            ? `${API_URL}/ImagesInventario/${productoEditar.foto}`
                                                             : productoEditar.Foto && typeof productoEditar.Foto === 'string'
-                                                                ? `http://localhost:8080/ImagesInventario/${productoEditar.Foto}`
+                                                                ? `${API_URL}/ImagesInventario/${productoEditar.Foto}`
                                                                 : ''
                                                 }
                                                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}

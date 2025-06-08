@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import API from '../../api/api';
+const API_URL = process.env.API_URL || "http://localhost:8080";
 
 export default function PerfilAdmin() {
   const navigate = useNavigate();
@@ -19,10 +21,10 @@ export default function PerfilAdmin() {
   useEffect(() => {
     const fetchAdmin = async () => {
       try {
-        const res = await axios.get(`http://localhost:8080/traerUsuario/${email}`);
+        const res = await API.get(`/traerUsuario/${email}`);
         setAdmin(res.data[0]);
         if (res.data[0].Foto) {
-          setImagePreview(`http://localhost:8080/perfil/${res.data[0].Foto}`);
+          setImagePreview(`${API_URL}/perfil/${res.data[0].Foto}`);
         }
       } catch (err) {
         console.error('Error al obtener los datos:', err);
@@ -89,7 +91,7 @@ export default function PerfilAdmin() {
 
     try {
       await axios.post(
-        `http://localhost:8080/actualizarUsuario/${email}`,
+        `${API_URL}/actualizarUsuario/${email}`,
         formData
       );
 
@@ -106,10 +108,10 @@ export default function PerfilAdmin() {
       });
 
       setFile(null);
-      const res = await axios.get(`http://localhost:8080/traerUsuario/${email}`);
+      const res = await API.get(`/traerUsuario/${email}`);
       setAdmin(res.data[0]);
       if (res.data[0].Foto) {
-        setImagePreview(`http://localhost:8080/perfil/${res.data[0].Foto}`);
+        setImagePreview(`${API_URL}/perfil/${res.data[0].Foto}`);
       } else {
         setImagePreview("https://cdn-icons-png.flaticon.com/512/149/149071.png");
       }

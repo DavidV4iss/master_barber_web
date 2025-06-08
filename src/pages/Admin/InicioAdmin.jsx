@@ -3,7 +3,9 @@ import SidebarAdmin from '../../Components/SidebarAdmin'
 import NavbarAdmin from '../../Components/NavbarAdmin'
 import axios from 'axios'
 import 'animate.css';
-import CalificacionesAdmin from '../../Components/calificacionesAdmin';
+import calificacionesAdmin from '../../Components/calificacionesAdmin';
+import API from '../../api/api';
+const API_URL = process.env.API_URL || "http://localhost:8080";
 
 export default function InicioAdmin() {
 
@@ -12,7 +14,7 @@ export default function InicioAdmin() {
     useEffect(() => {
         const fetchBarberos = async () => {
             try {
-                const res = await axios.get("http://localhost:8080/GetBarberos");
+                const res = await API.get("/GetBarberos");
                 setBarberos(res.data);
             } catch (err) {
                 console.log("Error al obtener los datos:", err);
@@ -64,7 +66,7 @@ export default function InicioAdmin() {
                             CALIFICACIONES A LA BARBERÍA
                         </h2>
                         <div className="text-white mx-4 mt-4">
-                            <CalificacionesAdmin />
+                            <calificacionesAdmin />
                         </div>
                     </div>
                 </div>

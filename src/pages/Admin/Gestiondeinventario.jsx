@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import GraficaVenta from '../../Components/GraficaVenta';
+import API from '../../api/api';
+const API_URL = process.env.API_URL || "http://localhost:8080";
 
 export default function Gestiondeinventario() {
     const [inventario, setInventario] = useState([]);
@@ -16,7 +18,7 @@ export default function Gestiondeinventario() {
     useEffect(() => {
         const getInventario = async () => {
             try {
-                const res = await axios.get("http://localhost:8080/GetInventario");
+                const res = await API.get("/GetInventario");
                 setInventario(res.data);
             } catch (err) {
                 console.log("Error al obtener los datos:", err);
@@ -28,7 +30,7 @@ export default function Gestiondeinventario() {
     useEffect(() => {
         const getVentas = async () => {
             try {
-                const res = await axios.get(`http://localhost:8080/GetVentas?rango=${rango}`);
+                const res = await API.get(`/GetVentas?rango=${rango}`);
                 setVentasProcesadas(res.data);
             } catch (err) {
                 console.error('Error al obtener las ventas:', err);
@@ -78,12 +80,12 @@ export default function Gestiondeinventario() {
         try {
             const ventasConFecha = venta.map(producto => ({ ...producto, fecha: new Date().toISOString().slice(0, 19).replace('T', ' ') }));
             for (const producto of ventasConFecha) {
-                await axios.put(`http://localhost:8080/RestarInventario/${producto.id_producto}`, {
+                await API.put(`/RestarInventario/${producto.id_producto}`, {
                     cantidad: producto.cantidad,
                 });
             }
-            await axios.post('http://localhost:8080/GuardarVentas', ventasConFecha);
-            const res = await axios.get(`http://localhost:8080/GetVentas?rango=${rango}`);
+            await API.post('/GuardarVentas', ventasConFecha);
+            const res = await API.get(`/GetVentas?rango=${rango}`);
             setVentasProcesadas(res.data);
 
             Swal.fire({
@@ -167,7 +169,7 @@ export default function Gestiondeinventario() {
                                     >
                                         <div className="card bg-dark h-100 shadow rounded-4">
                                             <img
-                                                src={`http://localhost:8080/ImagesInventario/${item.Foto}`}
+                                                src={`${API_URL}/ImagesInventario/${item.Foto}`}
                                                 alt={item.nombre}
                                                 className="card-img-top rounded-top-4 shadow"
                                                 style={{ height: '200px', objectFit: 'cover' }}

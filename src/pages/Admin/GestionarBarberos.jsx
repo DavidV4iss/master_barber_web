@@ -3,6 +3,8 @@ import SidebarAdmin from '../../Components/SidebarAdmin';
 import Swal from 'sweetalert2';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import API from '../../api/api';
+const API_URL = process.env.API_URL || "http://localhost:8080";
 
 export default function GestionarBarberos() {
   const [imagePreview, setImagePreview] = useState('');
@@ -36,7 +38,7 @@ export default function GestionarBarberos() {
       formData.append('descripcion', barbero.descripcion);
       formData.append('foto', barbero.foto);
 
-      const res = await axios.post(`http://localhost:8080/CreateBarberos`, formData);
+      const res = await API.post(`/CreateBarberos`, formData);
       if (res.status === 200) {
         Swal.fire({
           icon: 'success',
@@ -70,7 +72,7 @@ export default function GestionarBarberos() {
       formData.append('email', barberoEdit.email);
       formData.append('descripcion', barberoEdit.descripcion);
       formData.append('foto', barberoEdit.foto);
-      const res = await axios.put(`http://localhost:8080/UpdateBarberos/${barberoEdit.id_usuario}`, formData);
+      const res = await API.put(`/UpdateBarberos/${barberoEdit.id_usuario}`, formData);
       if (res.status === 200) {
         Swal.fire({
           icon: 'success',
@@ -155,7 +157,7 @@ export default function GestionarBarberos() {
       if (!confirm.isConfirmed) {
         return;
       }
-      const res = await axios.delete(`http://localhost:8080/DeleteBarberos/${id}`);
+      const res = await API.delete(`/DeleteBarberos/${id}`);
       console.log(res);
       if (res.status === 200) {
         Swal.fire({
@@ -184,7 +186,7 @@ export default function GestionarBarberos() {
 
   const fetchBarberos = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/GetBarberos");
+      const res = await API.get("/GetBarberos");
       setBarberos(res.data);
     } catch (err) {
       console.log("Error al obtener los datos:", err);
@@ -197,7 +199,7 @@ export default function GestionarBarberos() {
 
   const openEditModal = (barbero) => {
     setBarberoEdit(barbero);
-    setImagePreviewEdit(`http://localhost:8080/imagesBarbero/${barbero.Foto}`);
+    setImagePreviewEdit(`${API_URL}/imagesBarbero/${barbero.Foto}`);
   };
 
   return (
@@ -235,7 +237,7 @@ export default function GestionarBarberos() {
                       <td className='w-25 text-center p-5'>{barbero.nombre_usuario}</td>
                       <td className='w-25 text-center p-5'>{barbero.email}</td>
                       <td className='w-25 text-center p-5'>{barbero.descripcion}</td>
-                      <td><img src={`http://localhost:8080/imagesBarbero/${barbero.Foto}`} className='img-fluid zoomhover2' alt="" /></td>
+                      <td><img src={`${API_URL}/imagesBarbero/${barbero.Foto}`} className='img-fluid zoomhover2' alt="" /></td>
                       <td>
                         <div className="d-flex justify-content-center mt-5 mx-5">
                           <button type="button" className="btn btn-outline-warning me-5" onClick={() => openEditModal(barbero)} data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
@@ -265,7 +267,7 @@ export default function GestionarBarberos() {
                 </div>
                 <div className="modal-body d-flex justify-content-center ">
                   <div className="card bg-dark" style={{ width: '10rem' }}>
-                    <img src={imagePreviewEdit || `http://localhost:8080/imagesBarbero/${barberoEdit.foto}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} className='img-fluid text-white rounded' alt="Imagen Barbero" />
+                    <img src={imagePreviewEdit || `${API_URL}/imagesBarbero/${barberoEdit.foto}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} className='img-fluid text-white rounded' alt="Imagen Barbero" />
                   </div>
                 </div>
                 <div className="modal-body">
