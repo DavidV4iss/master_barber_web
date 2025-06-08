@@ -1,8 +1,8 @@
 import axios from "axios";
-const API_URL = "https://master-barber-api.onrender.com";
+const BACKEND_URL = process.env.BACKEND_URL || "http://localhost:8080";
 
 const API = axios.create({
-    baseURL: API_URL,
+    baseURL: BACKEND_URL,
     timeout: 10000,
 });
 
