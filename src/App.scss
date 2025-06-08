@@ -1,0 +1,612 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,600;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton+SC&family=Roboto&display=swap');
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+
+
+
+//TEMAS PARA LAS ALERTAS
+.dark-theme-popup {
+  color: aliceblue;
+}
+
+.dark-theme-popup .swal2-title {
+  color: #ffc107;
+  /* Color del título */
+}
+
+//FIN TEMAS PARA LAS ALERTAS
+
+
+//COLORES PARA BOTONES ALERTAS
+
+.colorojo {
+  color: #DC3545;
+}
+
+.colorverde {
+  color: #1bf30b;
+}
+
+
+
+
+// COLOR DE FLECHAS DE LOS CARROUSELES
+:root {
+  --swiper-theme-color: #DC3545 !important;
+}
+
+// FIN
+
+
+
+
+
+// TODOS LOS BACGROUNDS
+body {
+  background-color: #1f1f1f;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.login {
+  background-color: #000000;
+}
+
+
+.Registro {
+  background-color: #000000;
+}
+
+.resetpass {
+  background-color: #000000;
+}
+
+.bg-warning {
+  color: #ffc107;
+}
+
+// FIN BACGROUNDS
+
+
+
+
+
+
+
+// TODOS LOS TEXTOS
+.Texto {
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.anton {
+  letter-spacing: 5px;
+  font-family: "Anton SC", sans-serif;
+}
+
+.antonparabackend {
+  letter-spacing: 2px;
+  font-family: "Anton SC", sans-serif;
+}
+
+.antonpararecuperar {
+  font-family: "Anton SC", sans-serif;
+}
+
+.bebas {
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.lobster {
+  font-family: "Lobster", cursive;
+}
+
+.texto {
+  margin-bottom: -3px;
+}
+
+.UnifrakturMaguntia {
+  font-family: 'UnifrakturMaguntia', cursive;
+}
+
+// FIN TEXTOS
+
+
+// SIDEBARPARAADMIN
+.sidebar2 {
+  width: 12vw;
+
+  a {
+    text-decoration: none;
+
+    &.active {
+      background-color: #e9c706;
+    }
+  }
+}
+
+// FIN
+
+
+
+
+
+
+
+// STYLES IMGS
+.img {
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.2;
+  width: 50%;
+}
+
+// FIN IMGS
+
+
+
+
+
+
+// TODAS LAS MARGENES
+.welcomeindex {
+  margin-top: 10%;
+}
+
+.welcomeindex2 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.90), rgba(0, 0, 0, 0.85)), url('/logomastershop.png');
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+footer {
+  background-color: #111;
+}
+
+.welcome {
+  margin-top: 20%;
+}
+
+.welcome-2 {
+  margin-top: 25%;
+}
+
+.contenido {
+  margin-left: 10%;
+}
+
+.contenido2 {
+  margin-left: 12%;
+}
+
+.contenidol {
+  margin-left: 8%;
+}
+
+.contenido3 {
+  margin-left: 15%;
+}
+
+.contenido4 {
+  margin-left: 37%;
+}
+
+.contenido5 {
+  margin-left: 25%;
+}
+
+.contenido6 {
+  margin-left: 12%;
+}
+
+
+// FIN MARGENES
+
+
+
+
+
+
+.zoomhover2:hover {
+  transform: scale(1.2);
+}
+
+
+
+
+
+
+
+
+// SYLES CODIGO VERIFICACION
+.clase-codigo-verificacion {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  border-radius: 15px;
+  padding-bottom: 40px;
+}
+
+.cuadros {
+  border: 1px solid #fbff12;
+  background-color: #000000;
+  width: 60px;
+  height: 60px;
+  margin: 9px 5px;
+  font-size: 25px;
+  text-align: center;
+  border-radius: 15px;
+  transition: 0.3s;
+  border-radius: 100px;
+}
+
+// FIN
+
+
+
+
+// STYLE MAPA
+.map {
+  width: 100%;
+}
+
+// FIN 
+
+//ESTILOS DE LA FOTO DE PERFIL DEL BARBERO
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0.3;
+    transform: scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// FIN ESTILOS PARA LA FOTO DE PERFIL DEL BARBERO
+
+
+
+
+
+
+// DARK AND LIGHT STYLE 
+body.light {
+  background-color: #1f1f1f;
+  color: white;
+}
+
+body.dark {
+  background-color: white;
+  color: #1f1f1f;
+}
+
+button {
+  padding: 2px 5px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #1f1f1f;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #1f1f1f;
+}
+
+// FIN DARK AND LIGHT 
+
+
+.icono {
+  font-size: 190px;
+  /* Para íconos de texto */
+  color: #ffffff;
+  margin: 50px;
+}
+
+.sm {
+  font-size: 10px;
+}
+
+// Estilo Boton Cerrar Sesion
+.btn-two {
+  color: #FFF;
+  transition: all 0.5s;
+  position: relative;
+}
+
+.btn-two span {
+  z-index: 2;
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.btn-two::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: all 0.5s;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-two::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: all 0.5s;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-two:hover::before {
+  transform: rotate(-45deg);
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.btn-two:hover::after {
+  transform: rotate(45deg);
+  background-color: rgba(255, 255, 255, 0);
+}
+
+// Fin Estilo para Boton Cerrar Sesion
+
+.margen1 {
+  margin-top: 20%;
+}
+
+.card-calificacion:hover {
+  box-shadow: 0 0 30px 5px rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+.card-calificaciones {
+  width: 28rem;
+  border-radius: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
+
+.card-calificaciones:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 24px rgba(255, 0, 0, 0.4);
+}
+
+.w {
+  width: 18%;
+}
+
+/* Estilo general del calendario */
+.react-datepicker {
+  font-family: 'Bebas Neue', sans-serif;
+  background-color: #2c2c2c;
+  border: none;
+  color: white;
+  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+.react-datepicker__header {
+  background-color: #ffc107;
+  border-bottom: none;
+  padding: 10px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  color: #000;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+  color: black;
+  font-weight: bold;
+}
+
+.react-datepicker__day {
+  color: rgb(255, 255, 255);
+  width: 2.2rem;
+  line-height: 2.2rem;
+  margin: 0.1rem;
+}
+
+.react-datepicker__day-name {
+  color: rgb(10, 10, 10);
+  width: 2.2rem;
+  line-height: 2.2rem;
+  margin: 0.1rem;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #ffc107 !important;
+  color: #ffffff !important;
+  border-radius: 50%;
+}
+
+.react-datepicker__day:hover {
+  background-color: #000 !important;
+  color: #ffc107 !important;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+
+.react-datepicker__time-container {
+  background-color: #1f1f1f !important;
+  border-left: 1px solid #444;
+}
+
+.react-datepicker__time {
+  background-color: #1f1f1f !important;
+}
+
+.react-datepicker__time-box {
+  background-color: #1f1f1f !important;
+}
+
+.react-datepicker__time-list {
+  background-color: #1f1f1f !important;
+}
+
+.react-datepicker__time-list-item {
+  color: rgb(255, 254, 254) !important;
+  padding: 0.5rem;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.react-datepicker__time-list-item--selected {
+  background-color: #ffc107 !important;
+  color: rgba(143, 142, 142, 0.986) !important;
+  font-weight: bold;
+}
+
+.react-datepicker__time-list-item:hover {
+  background-color: #444 !important;
+}
+
+.react-datepicker__time-list-item--disabled {
+  color: #777 !important;
+  background-color: #1f1f1f !important;
+  pointer-events: none;
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.react-datepicker__triangle {
+  display: none;
+}
+
+.card-hover:hover {
+  transform: scale(1.02);
+  transition: all 0.3s ease-in-out;
+}
+
+.selected-card {
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+  border: 2px solid gold !important;
+}
+
+
+
+//ESTILO PARA LA FOTO DE PERFIL
+.fade-in {
+  animation: fadeInUp 0.8s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+//FIN ESTILO PARA LA FOTO DE PERFIL
+
+
+
+
+//ESTILOS PARA NOTIFICACIONES DEL USUARIO
+.notif-container {
+  max-height: 350px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 10px;
+}
+
+.notif-card {
+  background: linear-gradient(145deg, #343a40, #212529);
+  color: white;
+  display: flex;
+  align-items: flex-start;
+  border-radius: 12px;
+  padding: 15px;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.notif-card:hover {
+  transform: scale(1.02);
+}
+
+.notif-icon {
+  font-size: 1.8rem;
+  margin-right: 15px;
+  color: #ffc107;
+}
+
+.notif-content {
+  flex-grow: 1;
+}
+
+.notif-text {
+  font-weight: 100;
+  margin: 0 0 5px 0;
+  font-size: 0.95rem;
+}
+
+
+.notif-delete {
+  font-size: 1.2rem;
+  color: #dc3545;
+  cursor: pointer;
+  padding-left: 10px;
+}
+
+.notif-delete:hover {
+  color: #ff6b6b;
+}
+
+.swal2-toast-custom {
+  font-family: 'Bebas Neue', sans-serif;
+  border-left: 5px solid #ffc107;
+  margin-top: 25%;
+}
+
+.swal2-toast-custom:hover {
+  cursor: pointer;
+}
+
+// FIN ESTILOS PARA NOTIFICACIONES DEL USUARIO
