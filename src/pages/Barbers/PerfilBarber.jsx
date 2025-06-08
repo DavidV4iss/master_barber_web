@@ -93,8 +93,8 @@ export default function PerfilBarber() {
     setIsUpdating(true);
 
     try {
-      await axios.post(
-        `${API_URL}/actualizarBarbero/${email}`,
+      await API.post(
+        `/actualizarBarbero/${email}`,
         formData
       );
       Swal.fire({

@@ -93,8 +93,8 @@ export default function PerfilUser() {
     setIsUpdating(true);
 
     try {
-      await axios.post(
-        `${API_URL}/actualizarUsuario/${email}`,
+      await API.post(
+        `/actualizarUsuario/${email}`,
         formData
       );
 
