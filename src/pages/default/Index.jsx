@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NavbarIndex from '../../Components/NavbarIndex'
 import CarrouselShop from '../../Components/CarrouselShop'
-import CalificacionesAdmin from "../../Components/calificacionesAdmin";
+import CalificacionesAdmin from '../../Components/CalificacionesAdmin'
 import Darkandlight from "../../Components/Dark and light";
 import axios from 'axios'
 
