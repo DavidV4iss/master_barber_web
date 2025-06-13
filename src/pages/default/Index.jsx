@@ -64,7 +64,7 @@ export default function Index() {
                 <div className="container-fluid">
                     <div className="row">
                         <div class="col-12 col-sm-5 d-none d-sm-block">
-                            <img src="/MB1.JPG" alt="" className='img-fluid' />
+                            <img src="../../../public/LOGO.png" alt="" className='img-fluid' />
                         </div>
                         <div class="col-12 col-sm-7 text-center p-5">
                             <h2 className='welcome-2 text-danger anton display-1'>Sobre Nosotros</h2>
