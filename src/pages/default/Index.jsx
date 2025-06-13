@@ -64,7 +64,7 @@ export default function Index() {
                 <div className="container-fluid">
                     <div className="row">
                         <div class="col-12 col-sm-5 d-none d-sm-block">
-                            <img src="../../../public/LOGO.png" alt="" className='img-fluid' />
+                            <img src="/MB1.JPG" alt="" className='img-fluid' />
                         </div>
                         <div class="col-12 col-sm-7 text-center p-5">
                             <h2 className='welcome-2 text-danger anton display-1'>Sobre Nosotros</h2>
@@ -210,7 +210,7 @@ export default function Index() {
                 </p>
                 <div className="container mt-5 pt-5">
                     <div class="row row-cols-1 row-cols-md-3">
-                        {barberos.length === 0 && <p className='text-center text-danger'>No hay barberos para mostrar</p>}
+                        {barberos.length === 0 && <p className='text-center text-danger justify-content-center align-items-center'>No hay barberos para mostrar</p>}
                         {barberos.map((barbero) => (
                             <div className="col" key={barbero.id_usuario}>
                                 <div class="card bg-dark mt-5">
