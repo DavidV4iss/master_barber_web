@@ -209,8 +209,8 @@ export default function Index() {
                     soluta nemo nobis eligendi repellat id!
                 </p>
                 <div className="container mt-5 pt-5">
+                    {barberos.length === 0 && <p className='text-center text-danger'>No hay barberos para mostrar</p>}
                     <div class="row row-cols-1 row-cols-md-3">
-                        {barberos.length === 0 && <p className='text-center text-danger justify-content-center align-items-center'>No hay barberos para mostrar</p>}
                         {barberos.map((barbero) => (
                             <div className="col" key={barbero.id_usuario}>
                                 <div class="card bg-dark mt-5">
