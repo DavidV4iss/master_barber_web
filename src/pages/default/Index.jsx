@@ -58,7 +58,7 @@ export default function Index() {
             <NavbarIndex />
 
             <div className="video-hero">
-                <video src="/video.mp4" autoPlay loop muted playsInline className="video-bg" />
+                <video src="/images/video2.mp4" autoPlay loop muted playsInline className="video-bg" />
                 <div className="video-overlay "></div>
 
                 <div className="hero-content container text-white mt-4">
