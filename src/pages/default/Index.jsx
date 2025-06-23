@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import NavbarIndex from '../../Components/NavbarIndex'
 import CarrouselShop from '../../Components/CarrouselShop'
 import CalificacionesAdmin from "../../Components/calificacionesAdmin";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import API from "../../api/api";
 const API_URL = process.env.API_URL || "http://localhost:8080";
 
@@ -10,6 +12,7 @@ export default function Index() {
     const [niveles, setNiveles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [flipped, setFlipped] = useState([false, false, false]);
+    const [expanded, setExpanded] = useState(null);
 
     useEffect(() => {
         const fetchBarberos = async () => {
@@ -32,13 +35,15 @@ export default function Index() {
                     titulo: "CORTE BÁSICO",
                     imagen: <img src="/Corte7.jpg" alt="Corte Básico" className="img-fluid" style={{
                         width: "200%", height: "250px", objectFit: "cover", borderTopLeftRadius: "12px", borderTopRightRadius: "12px"
-                    }} />
+                    }} />,
+                    descripcion: "lorem"
                 },
                 {
                     titulo: "CORTE PREMIUM",
                     imagen: <img src="/Corte8.jpg" alt="Corte Premium" className="img-fluid" style={{
                         width: "200%", height: "250px", objectFit: "cover", borderTopLeftRadius: "12px", borderTopRightRadius: "12px"
-                    }} />
+                    }} />,
+                    descripcion: "lorem2"
                 },
             ]);
             setLoading(false);
@@ -51,6 +56,15 @@ export default function Index() {
             updated[index] = !updated[index];
             return updated;
         });
+    };
+
+    useEffect(() => {
+        AOS.init({ duration: 1000 });
+    }, [])
+
+
+    const toggleExpand = (id) => {
+        setExpanded(expanded === id ? null : id);
     };
 
     return (
@@ -86,10 +100,13 @@ export default function Index() {
                                 alt="Corte profesional"
                                 className="img-fluid shadow-lg mi-tarjeta"
                                 style={{ maxWidth: "70%", height: "auto", borderRadius: "50%" }}
+                                data-aos="fade-right"
                             />
                         </div>
                         <div className="col-md-6 mt-5 ">
                             <h2 className="text-white display-3 anton mb-4 text-center p-2"
+                                data-aos="fade-left"
+
                                 style={{
                                     background: 'linear-gradient(80deg,rgb(194, 158, 0),rgb(206, 202, 4))',
                                     border: 'none',
@@ -97,6 +114,7 @@ export default function Index() {
                                     color: 'white',
                                     boxShadow: '0 10px 12px rgba(0, 0, 0, 0.2)',
                                     transition: 'all 0.3s ease',
+
                                 }}>Sobre Nosotros</h2>
                             <p className="lead text-white">
                                 En <span className="text-warning fw-bold">Master Barber VIP</span>, transformamos cada corte en una obra de arte.
@@ -185,6 +203,7 @@ export default function Index() {
                                                 { }
                                                 <div className='card-back d-flex flex-column justify-content-center align-items-center text-white text-center px-3 rounded-4 bg-dark'>
                                                     <h5>{nivel.titulo}</h5>
+                                                    <p className='mt-3'>{nivel.descripcion}</p>
                                                 </div>
 
                                             </div>
@@ -200,83 +219,137 @@ export default function Index() {
 
 
 
+                <div className="welcome barber-price-section py-5" id="prices">
+                    <div className="container">
+                        <div className="row ">
 
-                <div className="welcome" id='prices'>
-                    <div className="container-fluid mt-5 pt-5">
-                        <div className="row">
-                            <div class="col-12 col-sm-8 text-center p-5 pt-5 mt-5">
-                                <h2 className="display-5 anton">Lista de precios</h2>
-                                <p className="mt-5">
-                                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                    Facere pariatur mollitia illo perspiciatis velit tempora fugiat neque ut,
-                                    dolorem laborum corrupti est officiis magni,
-                                    soluta nemo nobis eligendi repellat id!
+                            <div className="col-lg-5 mb-4 ps-lg-5" data-aos="fade-right">
+                                <img
+                                    src="/Corte4.jpg"
+                                    alt="Barbería moderna"
+                                    className="img-fluid rounded "
+                                />
+                            </div>
+
+                            <div className="col-lg-7 ps-lg-5" data-aos="fade-left">
+                                <h2 className="cesar display-4 mb-3 text-warning text-center">💈 Lista de Precios</h2>
+                                <p className="lead mb-4 text-center">
+                                    Servicios exclusivos con estilo, precisión y productos premium.
                                 </p>
-                                <div className="mt-5 pt-5">
-                                    <div className="border-bottom d-flex justify-content-between mt-4">
-                                        <p className="mx-3 antonparabackend">Corte Basico</p>
-                                        <p className='text-warning mx-3 antonparabackend'>20.000</p>
-                                    </div>
-                                    <div className="border-bottom d-flex justify-content-between mt-4">
-                                        <p className="mx-3 antonparabackend">Cejas</p>
-                                        <p className='text-warning mx-3 antonparabackend'>5.000</p>
-                                    </div>
-                                    <div className="border-bottom d-flex justify-content-between mt-4">
-                                        <p className="mx-3 antonparabackend">Figuras</p>
-                                        <p className='text-warning mx-3 antonparabackend'>5.000</p>
-                                    </div>
-                                    <div className="border-bottom d-flex justify-content-between mt-4">
-                                        <p className="mx-3 antonparabackend">Mascarillas</p>
-                                        <p className='text-warning mx-3 antonparabackend'>25.0000</p>
-                                    </div>
-                                    <div className="border-bottom d-flex justify-content-between mt-4">
-                                        <p className="mx-3 antonparabackend">Barbas</p>
-                                        <p className='text-warning mx-3 antonparabackend'>12.0000</p>
-                                    </div>
-                                    <div className="border-bottom d-flex justify-content-between mt-4">
-                                        <p className="mx-3 antonparabackend">Tintes</p>
-                                        <p className='text-warning mx-3 antonparabackend'>Depende Del Tinte</p>
-                                    </div>
-                                    <div className="border-bottom d-flex justify-content-between mt-4">
-                                        <p className="mx-3 antonparabackend">Corte Premium</p>
-                                        <p className='text-warning mx-3 antonparabackend'>55.000</p>
-                                    </div>
-                                </div>
 
-                            </div>
-                            <div class="row col-sm-4 col">
-                                <img src="/MB2.JPG" alt="" className="d-none d-sm-block" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="welcome" id='barbers'>
-                    <h1 className="text-center display-1 anton">CONOCE A NUESTROS ESTILISTAS</h1>
-                    <p className="mt-5 p-5 pt-5 text-center">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                        Facere pariatur mollitia illo perspiciatis velit tempora fugiat neque ut,
-                        dolorem laborum corrupti est officiis magni,
-                        soluta nemo nobis eligendi repellat id!
-                    </p>
-                    <div className="container mt-5 pt-5">
-                        {barberos.length === 0 && <p className='text-center text-danger'>No hay barberos para mostrar</p>}
-                        <div className="row row-cols-1 row-cols-md-3">
-                            {barberos.map((barbero) => (
-                                <div className="col" key={barbero.id_usuario}>
-                                    <div className="card bg-dark mt-5">
-                                        <img src={`${API_URL}/imagesBarbero/${barbero.Foto}`} class="card-img-top img-fluid" alt="..." />
-                                        <div className="card-body">
-                                            <h5 className="card-title text-danger text-center bebas fs-2 m-2">{barbero.nombre_usuario}</h5>
-                                            <p className="card-text text-white text-center mt-3 m-3">{barbero.descripcion}</p>
+                                <div className="price-list">
+                                    {[
+                                        { icon: "✂️", name: "Corte Básico", price: "$20.000" },
+                                        { icon: "🔍", name: "Cejas", price: "$5.000" },
+                                        { icon: "🎨", name: "Figuras", price: "$5.000" },
+                                        { icon: "🧖‍♂️", name: "Mascarillas", price: "$25.000" },
+                                        { icon: "🧔", name: "Barbas", price: "$12.000" },
+                                        { icon: "💇‍♂️", name: "Tintes", price: "Depende del tinte" },
+                                        { icon: "👑", name: "Corte Premium", price: "$55.000" },
+                                    ].map((item, i) => (
+                                        <div
+                                            key={i}
+                                            className="price-item d-flex justify-content-between align-items-center mb-3 px-4 py-3"
+                                            data-aos="zoom-in-up"
+                                            data-aos-delay={i * 100}
+                                        >
+                                            <span>
+                                                {item.icon} <strong>{item.name}</strong>
+                                            </span>
+                                            <span className="text-warning fw-bold">{item.price}</span>
                                         </div>
-
-                                    </div>
+                                    ))}
                                 </div>
-                            ))}
+                            </div>
                         </div>
                     </div>
                 </div>
+
+
+                <div className="position-relative welcome py-5">
+                    <section>
+                        <div className="overlay position-absolute top-0 start-0 w-100 h-100"></div>
+                        <div className="position-relative z-1 container">
+                            <h1 className="display-1 anton mb-4 text-center" data-aos="fade-down"
+                                style={{
+                                    background: 'linear-gradient(80deg,rgb(194, 158, 0),rgb(206, 202, 4))',
+                                    border: 'none',
+                                    borderRadius: '8px',
+                                    color: 'white',
+                                    boxShadow: '0 16px 12px rgba(0, 0, 0, 0.2)',
+                                    transition: 'all 0.3s ease',
+                                }}>
+                                CONOCE A NUESTROS ESTILISTAS
+                            </h1>
+
+                            <p className="lead px-3 mx-auto" data-aos="fade-up" style={{ maxWidth: "800px" }}>
+                                En nuestra barbería, el estilo y la personalidad se fusionan para darte una experiencia única.
+                                Conoce a los artistas detrás de cada corte, cada estilo tiene un nombre y una historia.
+                            </p>
+                            <div className="text-center mb-5">
+                                <div className="barber-tags d-inline-flex flex-wrap justify-content-center gap-3 mt-4" data-aos="fade-up">
+                                    {["#Fade", "#Taper", "#OldSchool", "#CleanStyle", "#MasterBarber"].map((tag, i) => (
+                                        <span key={i} className="badge rounded-pill text-dark fw-bold" style={{
+                                            background: "linear-gradient(45deg, gold, white)",
+                                            padding: "10px 20px",
+                                            fontSize: "1rem",
+                                        }}>
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="d-flex justify-content-center my-4" data-aos="fade">
+                                <div className="divider-barber position-relative">
+                                    <div className="barber-icon">✂️</div>
+                                </div>
+                            </div>
+
+                           
+                        </div>
+                    </section>
+
+                    <section className="container my-5 py-5">
+                        {barberos.length === 0 ? (
+                            <p className="text-center text-danger">No hay barberos para mostrar</p>
+                        ) : (
+                            <div className={`row g-5 justify-content-center ${barberos.length === 1 ? "row-cols-1" : "row-cols-1 row-cols-md-2 row-cols-lg-3"}`}>
+                                {barberos.map((barbero, index) => (
+                                    <div className="col d-flex justify-content-center" key={barbero.id_usuario} data-aos="zoom-in" data-aos-delay={index * 100}>
+                                        <div
+                                            className={`card border-0 rounded-4 shadow bg-dark text-white barber-card ${expanded === barbero.id_usuario ? "expanded" : ""}`}
+                                            style={{ width: "100%", maxWidth: "360px", cursor: "pointer", overflow: "hidden", transition: "all 0.4s ease" }}
+                                            onClick={() => toggleExpand(barbero.id_usuario)}
+                                        >
+                                            <img
+                                                src={`${API_URL}/imagesBarbero/${barbero.Foto}`}
+                                                alt={`Foto de ${barbero.nombre_usuario}`}
+                                                className="img-fluid rounded-top"
+                                                style={{ height: "360px", objectFit: "cover" }}
+                                            />
+                                            <div className="card-body text-center px-4 pb-3">
+                                                <h5 className="text-danger cesar fs-3 mb-2">{barbero.nombre_usuario}</h5>
+                                                <p className="card-text">{barbero.descripcion}</p>
+
+                                                {expanded === barbero.id_usuario && (
+                                                    <div className="expanded-content mt-4">
+                                                        <hr className="text-light" />
+                                                        <p><strong>Especialidades:</strong> Fades, diseño de barba, asesoría en imagen.</p>
+                                                        <p><strong>Experiencia:</strong> Más de 5 años en cortes urbanos y clásicos.</p>
+                                                        <p><strong>Horario:</strong> Lun - Sáb / 9am - 7pm</p>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </section>
+                </div>
+
+
+
 
 
                 <div className="welcome" id='shop'>
