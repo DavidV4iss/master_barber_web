@@ -217,8 +217,6 @@ export default function Index() {
 
 
 
-
-
                 <div className="welcome barber-price-section py-5" id="prices">
                     <div className="container">
                         <div className="row ">
