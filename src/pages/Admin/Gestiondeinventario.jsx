@@ -145,7 +145,7 @@ export default function Gestiondeinventario() {
     const ventasFiltradas = ventasProcesadas;
 
     return (
-        <div>
+        <div className="bg-dark">
             <NavbarAdmin />
             <SidebarAdmin />
             <div className="container py-5 ">

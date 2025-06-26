@@ -221,14 +221,14 @@ export default function Inventario() {
     const openEditModal = (item) => {
         setProductoEditar({
             ...item,
-            foto: item.Foto // Asegura que 'foto' tenga el valor correcto
+            foto: item.Foto
         });
         setImagePreviewEdit('');
     };
 
 
     return (
-        <div>
+        <div className='bg-dark'>
             <NavbarAdmin />
             <SidebarAdmin />
             <div className='mt-5'>

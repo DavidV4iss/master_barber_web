@@ -203,7 +203,7 @@ export default function GestionarBarberos() {
   };
 
   return (
-    <div>
+    <div className='bg-dark'>
       <NavbarAdmin />
       <SidebarAdmin />
       <div className='contenido2' id='GestionarBarberos'>

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import SidebarAdmin from '../../Components/SidebarAdmin'
 import NavbarAdmin from '../../Components/NavbarAdmin'
-import axios from 'axios'
 import 'animate.css';
 import calificacionesAdmin from '../../Components/calificacionesAdmin';
 import API from '../../api/api';
+import CalificacionesAdmin from '../../Components/calificacionesAdmin';
 const API_URL = process.env.API_URL || "http://localhost:8080";
 
 export default function InicioAdmin() {
@@ -24,7 +24,7 @@ export default function InicioAdmin() {
     }, [])
 
     return (
-        <div>
+        <div className='bg-dark'>
             <NavbarAdmin />
             <SidebarAdmin />
             <div className='contenido p-5 mt-5'>
@@ -66,7 +66,7 @@ export default function InicioAdmin() {
                             CALIFICACIONES A LA BARBERÍA
                         </h2>
                         <div className="text-white mx-4 mt-4">
-                            <calificacionesAdmin />
+                            <CalificacionesAdmin />
                         </div>
                     </div>
                 </div>

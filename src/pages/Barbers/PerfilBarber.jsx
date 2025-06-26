@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import API from '../../api/api';
@@ -123,7 +122,7 @@ export default function PerfilBarber() {
   };
 
   return (
-    <div className="">
+    <div className="bg-dark">
       <div className="min-vh-100 align-content-center mx-5 justify-content-end">
         <div className="container p-sm-5  border border-2 shadow border-white rounded-4 ">
           <a href="/GestionReservas">

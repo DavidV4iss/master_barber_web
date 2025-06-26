@@ -132,7 +132,7 @@ export default function PerfilAdmin() {
   };
 
   return (
-    <div>
+    <div className="bg-dark">
       <div className="min-vh-100 align-content-center mx-5 justify-content-end">
         <div className="container p-sm-5 border border-2 shadow border-white rounded-4">
           <a href="/InicioAdmin">

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import NavbarBarber from '../../Components/NavbarBarber';
 import API from '../../api/api';
 const API_URL = process.env.API_URL || "http://localhost:8080";
@@ -140,7 +139,7 @@ export default function GestionReservas() {
     };
 
     return (
-        <div className="text-white mb-5">
+        <div className="text-white mb-5 bg-dark">
             <NavbarBarber />
             <div className="text-center mt-5 pt-5 ">
                 <h2 className="fw-bold text-light display-5 anton">

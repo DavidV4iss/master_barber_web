@@ -141,20 +141,20 @@ export default function Index() {
                             color: 'white',
                             boxShadow: '0 16px 12px rgba(0, 0, 0, 0.2)',
                             transition: 'all 0.3s ease',
-                        }}>NUESTROS SERVICIOS</h1>
-                    <p className="mt-4 p-5 pt-4 text-center">
+                        }} data-aos="fade-down">NUESTROS SERVICIOS</h1>
+                    <p className="mt-4 p-5 pt-4 text-center" data-aos="fade-up">
                         En nuestra barbería, ofrecemos una experiencia única que va más allá de un simple corte.
                         Disfruta de servicios personalizados como cortes clásicos y modernos, afeitados con toalla caliente,
                         arreglo de barba, colorimetría capilar y tratamientos capilares revitalizantes.
                         Cada servicio está pensado para realzar tu estilo y brindar una atención de primera calidad.
                         ¡Déjanos cuidar de tu imagen como te lo mereces!
                     </p>
-                    <p className="text-center text-warning">TOCA EN LA CARTA PARA MAS INFORMACION</p>
+                    <p className="text-center text-warning" data-aos="fade-up">TOCA EN LA CARTA PARA MAS INFORMACION</p>
                     <div className='container'>
                         <div className='row g-5 mt-3 justify-content-center'>
                             {loading ? (
                                 [1, 2].map(i => (
-                                    <div className="col-md-4 d-flex justify-content-center" key={i}>
+                                    <div className="col-md-4 d-flex justify-content-center" key={i} data-aos="zoom-in" data-aos-delay={i * 100}>
                                         <div className="card bg-dark text-white" aria-hidden="true" style={{ width: "100%", maxWidth: "400px" }}>
                                             <div className="text-center m-3">
                                                 <div className="spinner-border text-info" role="status"></div>
@@ -175,7 +175,7 @@ export default function Index() {
                                 ))
                             ) : (
                                 niveles.map((nivel, i) => (
-                                    <div className='col-md-4 d-flex justify-content-center' key={i}>
+                                    <div className='col-md-4 d-flex justify-content-center' key={i} data-aos="zoom-in" data-aos-delay={i * 100}>
                                         <div className='card-container hover-effect mx-1' onClick={() => toggleFlip(i)} style={{
                                             height: "340px",
                                             width: "100%",
@@ -393,6 +393,17 @@ export default function Index() {
 
                 </div>
             </div>
+
+            {/* <a
+                    href="https://wa.me/573001234567"
+                    className="whatsapp-flotante"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="Chatea por WhatsApp"
+                >
+                    <i className="bi bi-whatsapp"></i>
+                    <span className="tooltip-wsp">¡Chatea con nosotros!</span>
+                </a> */ }
 
 
 
