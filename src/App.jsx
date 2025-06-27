@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import PrivateRoute from './Components/PrivateRoute';  // Importa tu componente de ruta privada
 import AccessDenied from './pages/default/AccessDenied'; // Importa el componente de acceso denegado
+import 'animate.css';
+
 
 // IMPORTACION PARA RUTAS
 import Login from './pages/default/Login';

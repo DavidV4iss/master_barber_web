@@ -20,7 +20,7 @@
   /* Color del título */
 }
 
-body{
+body {
   background-color: #212529;
 }
 
@@ -552,6 +552,9 @@ footer {
 
 
 
+
+
+
 //ESTILO PARA LA FOTO DE PERFIL
 .fade-in {
   animation: fadeInUp 0.8s ease-in-out;
@@ -570,6 +573,9 @@ footer {
 }
 
 //FIN ESTILO PARA LA FOTO DE PERFIL
+
+
+
 
 
 
@@ -639,6 +645,10 @@ footer {
 }
 
 // FIN ESTILOS PARA NOTIFICACIONES DEL USUARIO
+
+
+
+
 
 
 //TODO DE WHATSAPP
@@ -750,7 +760,7 @@ footer {
 
 
 
-
+//ESTILOS PARA CARTA DE SERVICIOS
 .card-container {
   perspective: 1000px;
   transition: transform 0.3s ease-in-out;
@@ -795,8 +805,14 @@ footer {
   transform: scale(1.05);
 }
 
+//FIN ESTILOS PARA CARTA DE SERVICIOS
 
 
+
+
+
+
+//ESTILOS DE PRECIOS
 .barber-price-section {
   font-family: 'Anton', sans-serif;
 }
@@ -826,9 +842,13 @@ footer {
   transition: transform 0.3s ease;
 }
 
+//FIN ESTILOS DE PRECIOS
 
 
 
+
+
+//HOVER PARA CARTA DE BARBEROS
 .card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -836,25 +856,6 @@ footer {
 .card:hover {
   transform: translateY(-10px);
 }
-
-.hero-barbers h1 {
-  font-size: 4rem;
-  letter-spacing: 2px;
-}
-
-.hero-barbers p {
-  font-size: 1.25rem;
-  font-weight: 300;
-}
-
-
-
-
-
-
-
-
-
 
 .divider-barber {
   width: 200px;
@@ -875,28 +876,115 @@ footer {
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
-.barber-card.expanded {
-  max-height: 1000px;
-  transition: all 0.4s ease-in-out;
+//FIN HOVER CARTA DE BARBEROS
+
+
+
+
+
+
+
+
+
+
+
+//ESTILOS DE PRODUCTOS A VENTA
+.horizontal-scroll-wrapper {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 16px;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #f1c40f #2c3e50;
+}
+
+.horizontal-scroll-wrapper::-webkit-scrollbar {
+  height: 10px;
 }
 
 
-
-.expanded-content {
-  text-align: left;
-  font-size: 0.9rem;
-  padding: 0 10px;
-  animation: fadeIn 0.4s ease-in-out;
+.product-card-horizontal {
+  flex: 0 0 auto;
+  width: 220px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 18px;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+.product-card-horizontal .card {
+  border-radius: 18px;
+  background-color: #212121;
+}
+
+.product-card-horizontal:hover {
+  cursor: pointer;
+}
+
+.product-card-horizontal img {
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+}
+
+.product-badge-stock {
+  font-size: 0.75rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+}
+
+.input-dark::placeholder {
+  color: #fff !important;
+  opacity: 1;
+}
+
+//FIN ESTILOS DE PRODUCTOS A VENTA
+
+
+
+
+
+
+
+
+.benefit-card {
+  background-color: #111;
+  border-radius: 20px;
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease; 
+  cursor: pointer;
+}
+
+.benefit-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+}
+
+.benefit-icon i {
+  font-size: 3.5rem;
+  color: #ffc107;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+  transition: transform 0.3s;
+}
+
+.benefit-card:hover .benefit-icon i {
+  transform: scale(1.2);
+}
+
+.cta-pulse {
+  animation: pulseGlow 1.5s infinite;
+  box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.4);
   }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  50% {
+    box-shadow: 0 0 25px rgba(255, 193, 7, 0.8);
+  }
+
+  100% {
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.4);
   }
 }

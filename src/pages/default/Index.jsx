@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import NavbarIndex from '../../Components/NavbarIndex'
-import CarrouselShop from '../../Components/CarrouselShop'
 import CalificacionesAdmin from "../../Components/calificacionesAdmin";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import API from "../../api/api";
+import Shop from "../../Components/Shop";
 const API_URL = process.env.API_URL || "http://localhost:8080";
 
 export default function Index() {
@@ -12,7 +12,6 @@ export default function Index() {
     const [niveles, setNiveles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [flipped, setFlipped] = useState([false, false, false]);
-    const [expanded, setExpanded] = useState(null);
 
     useEffect(() => {
         const fetchBarberos = async () => {
@@ -62,10 +61,6 @@ export default function Index() {
         AOS.init({ duration: 1000 });
     }, [])
 
-
-    const toggleExpand = (id) => {
-        setExpanded(expanded === id ? null : id);
-    };
 
     return (
         <div>
@@ -149,7 +144,7 @@ export default function Index() {
                         Cada servicio está pensado para realzar tu estilo y brindar una atención de primera calidad.
                         ¡Déjanos cuidar de tu imagen como te lo mereces!
                     </p>
-                    <p className="text-center text-warning" data-aos="fade-up">TOCA EN LA CARTA PARA MAS INFORMACION</p>
+                    <p className="text-center text-warning" data-aos="fade-up">TOCA ENa LA CARTA PARA MAS INFORMACION</p>
                     <div className='container'>
                         <div className='row g-5 mt-3 justify-content-center'>
                             {loading ? (
@@ -309,15 +304,14 @@ export default function Index() {
 
                     <section className="container my-5 py-5">
                         {barberos.length === 0 ? (
-                            <p className="text-center text-danger">No hay barberos para mostrar</p>
+                            <p className="text-center text-light fs-5">😕 No hay barberos para mostrar.</p>
                         ) : (
                             <div className={`row g-5 justify-content-center ${barberos.length === 1 ? "row-cols-1" : "row-cols-1 row-cols-md-2 row-cols-lg-3"}`}>
                                 {barberos.map((barbero, index) => (
                                     <div className="col d-flex justify-content-center" key={barbero.id_usuario} data-aos="zoom-in" data-aos-delay={index * 100}>
                                         <div
-                                            className={`card border-0 rounded-4 shadow bg-dark text-white barber-card ${expanded === barbero.id_usuario ? "expanded" : ""}`}
+                                            className="card border-0 rounded-4 shadow bg-dark text-white barber-card"
                                             style={{ width: "100%", maxWidth: "360px", cursor: "pointer", overflow: "hidden", transition: "all 0.4s ease" }}
-                                            onClick={() => toggleExpand(barbero.id_usuario)}
                                         >
                                             <img
                                                 src={`${API_URL}/imagesBarbero/${barbero.Foto}`}
@@ -329,14 +323,6 @@ export default function Index() {
                                                 <h5 className="text-danger cesar fs-3 mb-2">{barbero.nombre_usuario}</h5>
                                                 <p className="card-text">{barbero.descripcion}</p>
 
-                                                {expanded === barbero.id_usuario && (
-                                                    <div className="expanded-content mt-4">
-                                                        <hr className="text-light" />
-                                                        <p><strong>Especialidades:</strong> Fades, diseño de barba, asesoría en imagen.</p>
-                                                        <p><strong>Experiencia:</strong> Más de 5 años en cortes urbanos y clásicos.</p>
-                                                        <p><strong>Horario:</strong> Lun - Sáb / 9am - 7pm</p>
-                                                    </div>
-                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -351,27 +337,54 @@ export default function Index() {
 
 
                 <div className="welcome" id='shop'>
-                    <h1 className='text-center text-white display-1 bebas'>¡¡MASTER SHOP!!</h1>
-                    {length === 0 && <p className='text-center text-danger'>No hay productos para mostrar</p>}
-                    <CarrouselShop />
+                    <Shop />
                 </div>
 
-                <div className='welcome' id='turno'>
-                    <h1 className="text-center display-1 bebas">¿PORQUE RESERVAR CON NOSOTROS?</h1>
-                    <div className="row col-12 col-sm-12">
-                        <div className="container col border border mt-5 row col contenidol ">
-                            <h1 className='bebas text-center text-white mt-2 border-bottom fs-1'>PROFESIONALES CERTIFICADOS ✅</h1>
-                            <div className='row'>
-                                <div className="col container text-white fs-4 mb-3 mx-4 mt-3 text-center    ">
-                                    Contamos con un equipo altamente capacitado y con experiencia comprobada para brindarte un servicio de calidad.
+                <div className="section-benefits py-5 welcome">
+                    <div className="container text-center">
+                        <h1 className="display-3 fw-bold text-uppercase bebas mb-5 p-3" data-aos="fade-up"
+                            style={{
+                                background: 'linear-gradient(80deg,rgb(194, 158, 0),rgb(206, 202, 4))',
+                                border: 'none',
+                                borderRadius: '8px',
+                                color: 'white',
+                                boxShadow: '0 16px 12px rgba(0, 0, 0, 0.2)',
+                                transition: 'all 0.3s ease',
+                            }}>
+                            ¿Por qué reservar con nosotros?
+                        </h1>
+
+                        <div className="row justify-content-center g-5 pt-5 mt-3">
+
+                            <div className="col-md-5" data-aos="zoom-in" data-aos-delay="100">
+                                <div className="benefit-card text-white text-center p-4">
+                                    <div className="benefit-icon mb-3">
+                                        <i className="bi bi-person-check-fill"></i>
+                                    </div>
+                                    <h3 className="text-warning bebas mb-3">Profesionales Certificados</h3>
+                                    <p className="fs-5">
+                                        Barberos con experiencia, pasión y técnica, listos para darte el mejor corte y trato exclusivo.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="col-md-5" data-aos="zoom-in" data-aos-delay="200">
+                                <div className="benefit-card text-white text-center p-4">
+                                    <div className="benefit-icon mb-3">
+                                        <i className="bi bi-emoji-smile-fill"></i>
+                                    </div>
+                                    <h3 className="text-warning bebas mb-3">Experiencia Garantizada</h3>
+                                    <p className="fs-5">
+                                        Más que un corte, una experiencia que te hará volver. ¡Comodidad, música y estilo asegurados!
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                        <div className="col border border mt-4 col mx-5 mt-5">
-                            <h2 className='bebas text-center text-white mt-2 border-bottom fs-1'>EXPERIENCIA GARANTIZADA ⭐</h2>
-                            <div className=' text-white fs-4 mb-3 mx-4 mt-4 text-center'>
-                                Miles de clientes satisfechos nos respaldan. Tu satisfacción es nuestra prioridad.
-                            </div>
+
+                        <div className="mt-5 pt-5" data-aos="fade-up" data-aos-delay="300">
+                            <a href="#reservar" className="btn btn-warning btn-lg cta-pulse px-5 py-3 rounded-pill fw-bold ">
+                                💈 Reserva tu cita ahora
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -379,19 +392,33 @@ export default function Index() {
 
 
 
-                <div className="welcome" id='ubicacion'>
-                    <h1 className="text-center display-1 antonparabackend">Donde Nos Puedes Ubicar</h1>
-                    <div className="container-fluid d-flex mt-5  justify-content-center">
-                        <iframe className="map mt-5 mx-5" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.224597345888!2d-74.09438192628066!3d4.553574442918059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f99e5c678c39f%3A0xe8d6bf03bd32ac11!2sMASTER%20BARBER%20VIP!5e0!3m2!1ses!2sco!4v1717791930339!5m2!1ses!2sco" height="560px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                </div>
-
-
-                <div className="antonparabackend text-center pt-5 mt-5" id='calificaciones'>
+                <div className="antonparabackend text-center welcome" id='calificaciones'>
                     <h1 className="display-1">LO QUE PIENSAN NUESTRO CLIENTES</h1>
                     <div className="mt-5 pt-5"><CalificacionesAdmin /></div>
 
                 </div>
+
+                <div className="container welcome mb-5">
+                    <h1 className='text-center mb-5 fw-bold bebas display-1'>¿DÓNDE NOS ENCUENTRAS?</h1>
+                    <div className="row align-items-center justify-content-center gy-4 mt-5 ">
+                        <div className="col-md-5">
+                            <div className="ratio ratio-16x9 rounded-4 shadow">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.224597345888!2d-74.09438192628066!3d4.553574442918059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f99e5c678c39f%3A0xe8d6bf03bd32ac11!2sMASTER%20BARBER%20VIP!5e0!3m2!1ses!2sco!4v1717791930339!5m2!1ses!2sco" height="560px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" 
+                                    className="border rounded-4"
+                                    title="Ubicación MASTER BARBER VIP"
+                                    allowFullScreen
+                                ></iframe>
+                            </div>
+                        </div>
+
+                        <div className="col-md-6 text-center">
+                            <h2 className='fw-bold mx-4 cesar'>¡Visítanos para tener el gusto de atenderte y asesorarte para sacar lo mejor de ti!</h2>
+                        </div>
+                    </div>
+                </div>
+
+                
             </div>
 
             {/* <a
@@ -407,10 +434,63 @@ export default function Index() {
 
 
 
-
-            <footer className="text-center text-light py-4">
-                <small>© {new Date().getFullYear()} Barbería VIP. Todos los derechos reservados.</small>
-            </footer>
+            <div className="bg-light">
+                <footer className=" pt-5 pb-3 mx-auto shadow-sm">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-2 text-center">
+                                <img src="/LOGO.png" alt="Logo" style={{ width: "120px", cursor: "pointer" }} className="mb-3 hover-effect" />
+                                <p className="fw-bold mb-1 text-warning cesar">MASTER BARBER VIP</p>
+                                <p className="text-white" style={{ fontSize: "0.95rem" }}>
+                                    Barberia comprometida con la calidad y cambios de imagen
+                                </p>
+                            </div>
+                            <div className="col-md-3 mb-4 mt-5 mx-auto">
+                                <h6 className="fw-bold mb-2 text-white cesar">Contacto</h6>
+                                <p className="mb-1 text-white">Cra 4 Este #37b sur 38<br />Bogotá, Colombia</p>
+                                <p className="mb-1 text-white">Tel: (123) 456-7890</p>
+                                <p className="mb-1 text-white">Email: info@masterbarber.com</p>
+                                <p className="d-block text-primary">Para quejas y reclamos</p>
+                            </div>
+                            <div className="col-md-3 mb-4 mt-5">
+                                <h6 className="fw-bold mb-2 text-white cesar">Quiénes somos</h6>
+                                <ul className="list-unstyled">
+                                    <li><a href="#" className="text-white text-decoration-none">Nosotros</a></li>
+                                    <li><a href="#" className="text-white text-decoration-none">Servicios</a></li>
+                                    <li><a href="#" className="text-white text-decoration-none">Contacto</a></li>
+                                    <li><a href="#" className="text-white text-decoration-none">Blog</a></li>
+                                </ul>
+                            </div>
+                            <div className="col-md-2 mb-4 mt-5">
+                                <h6 className="fw-bold mb-2 text-white cesar">Políticas</h6>
+                                <ul className="list-unstyled">
+                                    <li><a href="#" className="text-white text-decoration-none">Política de Privacidad</a></li>
+                                    <li><a href="#" className="text-white text-decoration-none">Términos y Condiciones</a></li>
+                                </ul>
+                            </div>
+                            <div className="d-flex gap-3 mx-4">
+                                <a href="https://play.google.com/store" target="_blank" rel="noopener noreferrer">
+                                    <img
+                                        src="./play.png"
+                                        alt="Descargar en Google Play"
+                                        style={{ width: "140px", borderRadius: "8px", boxShadow: "0 2px 8px rgba(0,0,0,0.08)", transition: "transform 0.2s, box-shadow 0.2s" }}
+                                        onMouseOver={e => { e.currentTarget.style.transform = "scale(1.05)"; e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,0,0,0.18)"; }}
+                                        onMouseOut={e => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.08)"; }}
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                        <div className="row mt-4">
+                            <div className="col-md-8 text-white cesar small">
+                                © {new Date().getFullYear()} Master Barber VIP. Todos los derechos reservados.
+                            </div>
+                            <div className="col-md-4 text-end text-white small cesar">
+                                Diseñado y desarrollado por <a href="#" className="text-decoration-none text-primary hover-link">Anonimo</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
 
         </div >
 
