@@ -75,7 +75,7 @@ export default function NavbarBarber() {
   return (
     <div className="navbar shadow">
       <div class="container-fluid">
-        <a class="navbar-brand text-danger zoomhover2 anton fs-2 mx-4">
+        <a class="navbar-brand text-danger zoomhover2 cesar fs-2 mx-4">
           Master Barber
         </a>
         <div class="d-flex ">
@@ -86,7 +86,7 @@ export default function NavbarBarber() {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <div className="d-none d-sm-block text-white fw-bold small ">
+              <div className="d-none d-sm-block text-white fw-bold small cesar">
                 {barber.nombre_usuario}
               </div>
               <img

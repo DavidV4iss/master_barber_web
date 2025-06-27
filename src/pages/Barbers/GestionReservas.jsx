@@ -1,215 +1,131 @@
 import React, { useState, useEffect } from 'react';
 import NavbarBarber from '../../Components/NavbarBarber';
 import API from '../../api/api';
+import { CheckCircle, XCircle, Clock, Trash2 } from 'lucide-react';
+
 const API_URL = process.env.API_URL || "http://localhost:8080";
 
 export default function GestionReservas() {
     const [reservas, setReservas] = useState([]);
     const [servicios, setServicios] = useState([]);
     const [clientes, setClientes] = useState([]);
-    const [isLoadingFinal, setIsLoadingFinal] = useState(false);
-    const [isLoadingCancel, setIsLoadingCancel] = useState(false);
-    const [isLoadingAccept, setIsLoadingAccept] = useState(false);
-    const [finalizedReservations, setFinalizedReservations] = useState([]);
-    const [cancelTimers, setCancelTimers] = useState({});
+    const [loadingAction, setLoadingAction] = useState(null);
     const [Barber, setBarber] = useState({});
+    const [cancelTimers, setCancelTimers] = useState({});
+    const [finalizedReservations, setFinalizedReservations] = useState([]);
 
     const token = localStorage.getItem('token');
     const tokenDecoded = token ? JSON.parse(atob(token.split('.')[1])) : null;
     const id = tokenDecoded.id;
-    const usuario = JSON.parse(atob(token.split(".")[1]));
-    const email = usuario.email;
+    const email = tokenDecoded.email;
 
     useEffect(() => {
-        API.get(`/GetReservas/barbero/${id}`)
-            .then(res => setReservas(res.data))
-            .catch(err => console.error('Error al obtener reservas:', err));
-
-        API.get(`/traerUsuario/${email}`)
-            .then(res => setBarber(res.data[0]))
-            .catch(err => console.error('Error al obtener datos del barbero:', err));
-
-        API.get('/GetServicios')
-            .then(res => setServicios(res.data))
-            .catch(err => console.error('Error al obtener servicios:', err));
-
-        API.get('/GetClientes')
-            .then(res => setClientes(res.data))
-            .catch(err => console.error('Error al obtener clientes:', err));
+        API.get(`/GetReservas/barbero/${id}`).then(res => setReservas(res.data));
+        API.get(`/traerUsuario/${email}`).then(res => setBarber(res.data[0]));
+        API.get('/GetServicios').then(res => setServicios(res.data));
+        API.get('/GetClientes').then(res => setClientes(res.data));
     }, []);
 
-    const handleAccept = (id) => {
-        setIsLoadingAccept(true);
-        API.patch(`/UpdateReservasEstado/${id}`, { estado: 'Aceptada' })
+    const handleUpdateEstado = (id, nuevoEstado) => {
+        setLoadingAction(id + nuevoEstado);
+        API.patch(`/UpdateReservasEstado/${id}`, { estado: nuevoEstado })
             .then(() => {
-                setReservas(prev =>
-                    prev.map(res => res.id_reserva === id ? { ...res, estado: 'Aceptada' } : res)
-                );
-                if (cancelTimers[id]) {
-                    clearTimeout(cancelTimers[id]);
-                    setCancelTimers(prev => {
-                        const updated = { ...prev };
-                        delete updated[id];
-                        return updated;
-                    });
+                setReservas(prev => prev.map(r =>
+                    r.id_reserva === id ? { ...r, estado: nuevoEstado } : r
+                ));
+                if (nuevoEstado === 'Cancelada') {
+                    const timer = setTimeout(() => handleDelete(id), 60 * 60 * 1000);
+                    setCancelTimers(prev => ({ ...prev, [id]: timer }));
                 }
+                if (nuevoEstado === 'finalizada') setFinalizedReservations(prev => [...prev, id]);
             })
-            .catch(err => console.error('Error al aceptar reserva:', err))
-            .finally(() => setIsLoadingAccept(false));
-    };
-
-    const handleCancel = (id) => {
-        setIsLoadingCancel(true);
-        API.patch(`/UpdateReservasEstado/${id}`, { estado: 'Cancelada' })
-            .then(() => {
-                setReservas(prev =>
-                    prev.map(res => res.id_reserva === id ? { ...res, estado: 'Cancelada' } : res)
-                );
-                const timer = setTimeout(() => handleDelete(id), 60 * 60 * 1000);
-                setCancelTimers(prev => ({ ...prev, [id]: timer }));
-            })
-            .catch(err => console.error('Error al cancelar reserva:', err))
-            .finally(() => setIsLoadingCancel(false));
-    };
-
-    const handleFinalize = (id) => {
-        setIsLoadingFinal(true);
-        API.patch(`/UpdateReservasEstado/${id}`, { estado: 'finalizada' })
-            .then(() => {
-                setReservas(prev =>
-                    prev.map(res => res.id_reserva === id ? { ...res, estado: 'finalizada' } : res)
-                );
-                setFinalizedReservations(prev => [...prev, id]);
-            })
-            .catch(err => console.error('Error al finalizar reserva:', err))
-            .finally(() => setIsLoadingFinal(false));
+            .finally(() => setLoadingAction(null));
     };
 
     const handleDelete = (id) => {
-        API.delete(`/DeleteReserva/${id}`)
-            .then(() => {
-                setReservas(prev => prev.filter(res => res.id_reserva !== id));
-                if (cancelTimers[id]) {
-                    clearTimeout(cancelTimers[id]);
-                    setCancelTimers(prev => {
-                        const updated = { ...prev };
-                        delete updated[id];
-                        return updated;
-                    });
-                }
-            })
-            .catch(err => console.error('Error al eliminar reserva:', err));
+        API.delete(`/DeleteReserva/${id}`).then(() => {
+            setReservas(prev => prev.filter(r => r.id_reserva !== id));
+            clearTimeout(cancelTimers[id]);
+        });
     };
 
-    const getServiceName = (id) => {
-        const servicio = servicios.find(s => s.id_tipo_servicio === id);
-        return servicio ? servicio.nombre : 'Desconocido';
-    };
+    const getServiceName = (id) => servicios.find(s => s.id_tipo_servicio === id)?.nombre || 'Servicio desconocido';
 
     const getClientInfo = (id) => {
         const cliente = clientes.find(c => c.id_usuario === id);
-        return cliente
-            ? {
-                nombre: cliente.nombre_usuario,
-                imagen: (
-                    <img
-                        src={`${API_URL}/perfil/${cliente.Foto}`}
-                        alt="Foto de Perfil"
-                        className="img-fluid rounded-circle"
-                        style={{ width: '100px', height: '100px', objectFit: 'cover' }}
-                    />
-                )
-            }
-            : { nombre: 'Desconocido', imagen: null };
+        return cliente ? {
+            nombre: cliente.nombre_usuario,
+            foto: `${API_URL}/perfil/${cliente.Foto}`
+        } : { nombre: 'Cliente desconocido', foto: '' };
     };
 
-    const getEstadoColor = (estado) => {
+    const getEstadoClass = (estado) => {
         switch (estado) {
-            case 'Pendiente':
-                return 'text-primary';
-            case 'Aceptada':
-                return 'text-success';
-            case 'Cancelada':
-                return 'text-warning';
-            case 'finalizada':
-                return 'text-secondary';
-            default:
-                return 'text-light';
+            case 'Pendiente': return 'estado-pendiente';
+            case 'Aceptada': return 'estado-aceptada';
+            case 'Cancelada': return 'estado-cancelada';
+            case 'finalizada': return 'estado-finalizada';
+            default: return '';
         }
     };
 
     return (
-        <div className="text-white mb-5 bg-dark">
-            <NavbarBarber />
-            <div className="text-center mt-5 pt-5 ">
-                <h2 className="fw-bold text-light display-5 anton">
-                    HOLA <span className="text-warning">{Barber.nombre_usuario}</span>,{' '}
-                    {reservas.length > 0
-                        ? 'TIENES LAS SIGUIENTES RESERVAS PENDIENTES'
-                        : 'TODO TRANQUILO, NO TIENES RESERVAS'}
-                </h2>
+        <div className="gestion-reservas">
+                <NavbarBarber />
+            <div className="container">
+                <h2 className="mt-5 cesar">Hola <span className="cesar">{Barber.nombre_usuario}</span> 👋</h2>
+                <div className="row g-4">
+                    {reservas.length === 0 ? (
+                        <div className="text-center w-100 fs-4 cesar mt-5 fs-3 fw-bold text-danger">No tienes reservas pendientes.</div>
+                    ) : reservas.map(reserva => {
+                        const cliente = getClientInfo(reserva.cliente_id);
+                        const isLoading = loadingAction?.startsWith(reserva.id_reserva.toString());
 
-                {isLoadingFinal && (
-                    <div className="text-center mt-5 fs-4 UnifrakturMaguntia text-danger">
-                        Finalizando...
-                    </div>
-                )}
-                {isLoadingCancel && (
-                    <div className="text-center mt-5 fs-4 UnifrakturMaguntia text-warning">
-                        Cancelando...
-                    </div>
-                )}
-                {isLoadingAccept && (
-                    <div className="text-center mt-5 fs-4 UnifrakturMaguntia text-success">
-                        Aceptando...
-                    </div>
-                )}
-
-                <div className="container-fluid mt-5">
-                    <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 px-4">
-                        {reservas.map((reserva) => {
-                            const cliente = getClientInfo(reserva.cliente_id);
-                            return (
-                                <div className="col" key={reserva.id_reserva}>
-                                    <div className="card bg-dark text-white shadow rounded-4 p-3 h-100">
-                                        <div className="text-center">{cliente.imagen}</div>
-                                        <div className="mt-4">
-                                            <p><strong className="text-warning">Cliente:</strong> {cliente.nombre}</p>
-                                            <p><strong className="text-warning">Servicio:</strong> {getServiceName(reserva.servicio)}</p>
-                                            <p><strong className="text-warning">Observaciones:</strong> {reserva.observacion?.trim() || 'Sin observaciones'}</p>
-                                            <p><strong className="text-warning">Fecha y Hora:</strong> {new Date(reserva.fecha).toLocaleString()}</p>
-                                            <p>
-                                                <strong className="text-warning">Estado:</strong>{' '}
-                                                <span className={`fw-bold ${getEstadoColor(reserva.estado)}`}>
-                                                    {reserva.estado}
-                                                </span>
-                                            </p>
+                        return (
+                            <div className="col-12 col-md-6 col-lg-4" key={reserva.id_reserva}>
+                                <div className="card reserva-card h-100">
+                                    <div className="card-body d-flex flex-column">
+                                        <div className="text-center mb-3">
+                                            {cliente.foto && (
+                                                <img src={cliente.foto} alt="Cliente" className="cliente-img" />
+                                            )}
+                                            <h5 className="mt-2 cesar">{cliente.nombre}</h5>
                                         </div>
 
-                                        <div className="mt-4 d-flex justify-content-center flex-wrap gap-2">
+                                        <p><strong className='cesar'>Servicio:</strong> {getServiceName(reserva.servicio)}</p>
+                                        <p><strong className='cesar'>Observación:</strong> {reserva.observacion?.trim() || 'Sin observaciones'}</p>
+                                        <p><strong className='cesar'>Fecha:</strong> {new Date(reserva.fecha).toLocaleString()}</p>
+                                        <p>
+                                            <strong className='cesar'>Estado:</strong>{' '}
+                                            <span className={`estado-badge ${getEstadoClass(reserva.estado)}`}>
+                                                {reserva.estado}
+                                            </span>
+                                        </p>
+
+                                        <div className="mt-auto d-flex flex-wrap gap-2 justify-content-center">
                                             {finalizedReservations.includes(reserva.id_reserva) ? (
-                                                <button className="btn btn-danger" onClick={() => handleDelete(reserva.id_reserva)}>
-                                                    Eliminar
+                                                <button className="btn btn-danger reserva-btn" onClick={() => handleDelete(reserva.id_reserva)}>
+                                                    <Trash2 size={16} /> Eliminar
                                                 </button>
                                             ) : (
                                                 <>
-                                                    <button className="btn btn-success" onClick={() => handleAccept(reserva.id_reserva)}>
-                                                        Aceptar
+                                                    <button className="btn btn-success reserva-btn" disabled={isLoading} onClick={() => handleUpdateEstado(reserva.id_reserva, 'Aceptada')}>
+                                                        <CheckCircle size={16} /> Aceptar
                                                     </button>
-                                                    <button className="btn btn-danger" onClick={() => handleFinalize(reserva.id_reserva)}>
-                                                        {isLoadingFinal ? 'Finalizando...' : 'Finalizar'}
+                                                    <button className="btn btn-secondary reserva-btn" disabled={isLoading} onClick={() => handleUpdateEstado(reserva.id_reserva, 'finalizada')}>
+                                                        <Clock size={16} /> Finalizar
                                                     </button>
-                                                    <button className="btn btn-warning" onClick={() => handleCancel(reserva.id_reserva)}>
-                                                        Cancelar
+                                                    <button className="btn btn-warning text-dark reserva-btn" disabled={isLoading} onClick={() => handleUpdateEstado(reserva.id_reserva, 'Cancelada')}>
+                                                        <XCircle size={16} /> Cancelar
                                                     </button>
                                                 </>
                                             )}
                                         </div>
                                     </div>
                                 </div>
-                            );
-                        })}
-                    </div>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </div>
