@@ -37,7 +37,7 @@ export default function NavbarIndex() {
 
                     <ul className="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="menuDropdown">
                         <li><a className="dropdown-item" href="#">Inicio</a></li>
-                        <li><a className="dropdown-item" href="#">Nosotros</a></li>
+                        <li><a className="dropdown-item" href="#nosotros">Nosotros</a></li>
                         <li><hr className="dropdown-divider" /></li>
                         <li><a className="dropdown-item" href="/Login">Iniciar Sesión</a></li>
                     </ul>

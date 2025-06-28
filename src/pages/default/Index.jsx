@@ -67,7 +67,7 @@ export default function Index() {
             <NavbarIndex />
 
             <div className="video-hero">
-                <video src="/images/video2.mp4" autoPlay loop muted playsInline className="video-bg" />
+                <video src="video2.mp4" autoPlay loop muted playsInline className="video-bg" />
                 <div className="video-overlay "></div>
 
                 <div className="hero-content container text-white mt-4">
@@ -87,7 +87,7 @@ export default function Index() {
             </div>
 
             <div className="bg-dark shadow py-5  text-white">
-                <div className="container mt-5 pt-5 ">
+                <div className="container mt-5 pt-5 " id="nosotros">
                     <div className="row align-items-center">
                         <div className="col-md-6 mb-4 mb-md-0">
                             <img
@@ -382,7 +382,7 @@ export default function Index() {
                         </div>
 
                         <div className="mt-5 pt-5" data-aos="fade-up" data-aos-delay="300">
-                            <a href="#reservar" className="btn btn-warning btn-lg cta-pulse px-5 py-3 rounded-pill fw-bold ">
+                            <a href="/Login" className="btn btn-warning btn-lg cta-pulse px-5 py-3 rounded-pill fw-bold ">
                                 💈 Reserva tu cita ahora
                             </a>
                         </div>
@@ -404,7 +404,7 @@ export default function Index() {
                         <div className="col-md-5">
                             <div className="ratio ratio-16x9 rounded-4 shadow">
                                 <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.224597345888!2d-74.09438192628066!3d4.553574442918059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f99e5c678c39f%3A0xe8d6bf03bd32ac11!2sMASTER%20BARBER%20VIP!5e0!3m2!1ses!2sco!4v1717791930339!5m2!1ses!2sco" height="560px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" 
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.224597345888!2d-74.09438192628066!3d4.553574442918059!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f99e5c678c39f%3A0xe8d6bf03bd32ac11!2sMASTER%20BARBER%20VIP!5e0!3m2!1ses!2sco!4v1717791930339!5m2!1ses!2sco" height="560px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
                                     className="border rounded-4"
                                     title="Ubicación MASTER BARBER VIP"
                                     allowFullScreen
@@ -412,13 +412,13 @@ export default function Index() {
                             </div>
                         </div>
 
-                        <div className="col-md-6 text-center">
+                        <div className="col-md-7 text-center">
                             <h2 className='fw-bold mx-4 cesar'>¡Visítanos para tener el gusto de atenderte y asesorarte para sacar lo mejor de ti!</h2>
                         </div>
                     </div>
                 </div>
 
-                
+
             </div>
 
             {/* <a
