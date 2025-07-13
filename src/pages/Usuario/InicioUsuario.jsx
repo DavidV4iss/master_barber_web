@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import NavbarUserIndex from '../../Components/NavbarUserIndex';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 import Rating from 'react-rating-stars-component';
 import ReservaCliente from './ReservaCliente';
 import CalificacionesUser from '../../Components/CalificacionesUser';
 import 'animate.css';
 import API from '../../api/api';
+import NotaVoz from './NotaVoz';
 
 export default function InicioUsuario() {
   const [user, setUser] = useState({});
   const [mostrarReserva, setMostrarReserva] = useState(false);
-  const [reservaFactura, setReservaFactura] = useState(null);
 
   const token = localStorage.getItem("token");
   const usuario = JSON.parse(atob(token.split(".")[1]));
@@ -29,6 +28,30 @@ export default function InicioUsuario() {
     };
     fetchUser();
   }, [email]);
+
+
+  const [ultimaReserva, setUltimaReserva] = useState(null);
+
+  useEffect(() => {
+    const fetchUltimaReserva = async () => {
+      try {
+        const res = await API.get(`/GetReservasCliente/${id}`);
+        const reservas = res.data;
+
+        if (reservas.length > 0) {
+          const ultima = reservas.sort((a, b) => new Date(b.fecha) - new Date(a.fecha))[0];
+          setUltimaReserva(ultima);
+        }
+      } catch (err) {
+        console.log("Error al obtener reservas:", err);
+      }
+    };
+
+    if (id) {
+      fetchUltimaReserva();
+    }
+  }, [id]);
+
 
   const [nuevaCalificacion, setNuevaCalificacion] = useState({
     id: id,
@@ -92,6 +115,9 @@ export default function InicioUsuario() {
               ¡Nos alegra verte de nuevo! Reserva tu cita fácilmente, califica nuestro servicio y disfruta de la mejor experiencia en barbería.
             </p>
           </div>
+
+         {/* {ultimaReserva && <NotaVoz reservaId={ultimaReserva.id_reserva} />} */}
+
 
 
           <div className="col-12 col-md-6 text-center mb-4 mb-md-0">
