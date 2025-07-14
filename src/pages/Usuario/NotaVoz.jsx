@@ -4,7 +4,6 @@ import { FaMicrophone, FaStop, FaMicrophoneAlt, FaVolumeUp } from 'react-icons/f
 import Swal from 'sweetalert2';
 import API from '../../api/api';
 
-
 const API_URL = process.env.API_URL || "http://localhost:8080";
 const token = localStorage.getItem("token");
 const usuario_id = token ? JSON.parse(atob(token.split('.')[1]))?.id : null;
@@ -16,12 +15,12 @@ const NotaVoz = ({ reservaId }) => {
     const chunks = useRef([]);
 
     useEffect(() => {
-        if (reservaId) fetchNotas();
-    }, [reservaId]);
+        if (usuario_id) fetchNotas();
+    }, [usuario_id]);
 
     const fetchNotas = async () => {
         try {
-            const res = await axios.get(`${API_URL}/notasVoz/${reservaId}`);
+            const res = await axios.get(`${API_URL}/notasVozUsuario/${usuario_id}`);
             setNotas(res.data);
         } catch (err) {
             console.error('Error al obtener notas:', err);
@@ -40,7 +39,7 @@ const NotaVoz = ({ reservaId }) => {
             const formData = new FormData();
             formData.append('audio', blob, `nota-${Date.now()}.webm`);
             formData.append('usuario_id', usuario_id);
-            formData.append('reserva_id', reservaId);
+            formData.append('reserva_id', reservaId || null);
 
             await axios.post(`${API_URL}/uploadNotaVoz`, formData);
             fetchNotas();
@@ -56,8 +55,6 @@ const NotaVoz = ({ reservaId }) => {
         setGrabando(false);
     };
 
-    const ultimaNota = notas.length > 0 ? notas[notas.length - 1] : null;
-
     const eliminarNota = async (id) => {
         try {
             const confirm = await Swal.fire({
@@ -72,11 +69,9 @@ const NotaVoz = ({ reservaId }) => {
                     popup: "dark-theme-popup bg-dark antonparabackend ",
                 },
             });
-            if (!confirm.isConfirmed) {
-                return;
-            }
+            if (!confirm.isConfirmed) return;
+
             const res = await API.delete(`/deleteNotaVoz/${id}`);
-            console.log(res);
             if (res.status === 200) {
                 Swal.fire({
                     timer: 9000,
@@ -85,16 +80,13 @@ const NotaVoz = ({ reservaId }) => {
                     customClass: {
                         popup: "dark-theme-popup bg-dark antonparabackend ",
                     },
-                }).then(() => {
-                    window.location.reload(0);
-                })
+                }).then(() => window.location.reload());
             }
         } catch (error) {
-            console.log(error);
             Swal.fire({
                 icon: 'error',
                 title: 'Error al borrar',
-                text: error.response.data,
+                text: error.response?.data || 'Error inesperado',
                 customClass: {
                     popup: "dark-theme-popup bg-dark antonparabackend ",
                 },
@@ -102,6 +94,12 @@ const NotaVoz = ({ reservaId }) => {
         }
     };
 
+    const notasAgrupadas = notas.reduce((acc, nota) => {
+        const key = nota.reserva_id || "sin_reserva";
+        if (!acc[key]) acc[key] = [];
+        acc[key].push(nota);
+        return acc;
+    }, {});
 
     return (
         <div className="mt-4 p-4 rounded bg-dark shadow-lg text-white border border-secondary">
@@ -118,43 +116,37 @@ const NotaVoz = ({ reservaId }) => {
                 <p className="mt-2 fw-bold">
                     {grabando ? "🎙️ Grabando..." : "Presiona para grabar"}
                 </p>
-            </div>
 
-            {ultimaNota && (
-                <div className="bg-secondary bg-opacity-25 p-3 rounded mb-4">
-                    <h6 className="text-warning"><FaVolumeUp className="me-2" />Última nota grabada</h6>
-                    <div className="d-flex align-items-center justify-content-between">
-                        <audio src={`${API_URL}/notasVoz/${ultimaNota.nombre_archivo}`} controls className="w-75" />
-                        <button className="btn btn-sm btn-outline-danger ms-2" onClick={() => eliminarNota(ultimaNota.id)}>
-                            🗑️
-                        </button>
+                {reservaId === null && (
+                    <div className="alert alert-warning text-dark mt-3">
+                        No tienes reservas activas, pero aún puedes grabar una nota de voz.
                     </div>
-
-                    <p className="text-light small mt-1">
-                        Grabada el: {new Date(ultimaNota.fecha).toLocaleString()}
-                    </p>
-                </div>
-            )}
+                )}
+            </div>
 
             <div>
                 <h5 className="mb-3">Historial de Notas</h5>
-                {notas
-                    .slice(0, -1)
-                    .reverse()
-                    .map((nota) => (
-                        <div key={nota.id} className="bg-secondary bg-opacity-10 rounded p-2 mb-2">
-                            <div className="d-flex align-items-center justify-content-between">
-                                <audio src={`${API_URL}/notasVoz/${nota.nombre_archivo}`} controls className="w-75" />
-                                <button className="btn btn-sm btn-outline-danger ms-2" onClick={() => eliminarNota(nota.id)}>
-                                    🗑️
-                                </button>
-                            </div>
+                {Object.entries(notasAgrupadas).map(([reserva, grupoNotas]) => (
+                    <div key={reserva} className="mb-4">
+                        <h6 className="text-info mb-2">
+                            {reserva === "sin_reserva" ? "🎤 Notas sin reserva" : `📌 Reserva #${reserva}`}
+                        </h6>
 
-                            <p className="small text-white-50 mt-1 mb-0">
-                                {new Date(nota.fecha).toLocaleString()}
-                            </p>
-                        </div>
-                    ))}
+                        {grupoNotas.map((nota) => (
+                            <div key={nota.id} className="bg-secondary bg-opacity-10 rounded p-2 mb-2">
+                                <div className="d-flex align-items-center justify-content-between">
+                                    <audio src={`${API_URL}/notasVoz/${nota.nombre_archivo}`} controls className="w-75" />
+                                    <button className="btn btn-sm btn-outline-danger ms-2" onClick={() => eliminarNota(nota.id)}>
+                                        🗑️
+                                    </button>
+                                </div>
+                                <p className="small text-white-50 mt-1 mb-0">
+                                    {new Date(nota.fecha).toLocaleString()}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                ))}
             </div>
         </div>
     );

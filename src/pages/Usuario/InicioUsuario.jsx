@@ -7,6 +7,9 @@ import CalificacionesUser from '../../Components/CalificacionesUser';
 import 'animate.css';
 import API from '../../api/api';
 import NotaVoz from './NotaVoz';
+const API_URL = process.env.API_URL || "http://localhost:8080";
+
+
 
 export default function InicioUsuario() {
   const [user, setUser] = useState({});
@@ -116,7 +119,8 @@ export default function InicioUsuario() {
             </p>
           </div>
 
-         {/* {ultimaReserva && <NotaVoz reservaId={ultimaReserva.id_reserva} />} */}
+          {/* <NotaVoz reservaId={ultimaReserva?.id_reserva || null} /> */}
+
 
 
 
@@ -179,6 +183,18 @@ export default function InicioUsuario() {
             <CalificacionesUser userId={id} />
           </div>
         </div>
+
+        {ultimaReserva?.estado === 'Aceptada' || ultimaReserva?.estado === 'finalizada' ? (
+          <a
+            href={`${API_URL}/generarFactura/${ultimaReserva.id_reserva}`}
+            download
+            className="btn btn-outline-primary mt-3"
+          >
+            🧾 Descargar Factura
+          </a>
+
+        ) : null}
+
       </div>
 
       <footer className="text-center text-light py-4">
