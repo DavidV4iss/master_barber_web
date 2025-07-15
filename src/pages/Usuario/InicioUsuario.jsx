@@ -139,6 +139,16 @@ export default function InicioUsuario() {
                 <ReservaCliente />
               )}
             </div>
+            {ultimaReserva?.estado === 'Aceptada' || ultimaReserva?.estado === 'finalizada' ? (
+              <a
+                href={`${API_URL}/generarFactura/${ultimaReserva.id_reserva}`}
+                download
+                className="btn btn-outline-warning mt-3"
+              >
+                🧾 Descargar Factura
+              </a>
+
+            ) : null}
           </div>
         </div>
 
@@ -184,16 +194,7 @@ export default function InicioUsuario() {
           </div>
         </div>
 
-        {ultimaReserva?.estado === 'Aceptada' || ultimaReserva?.estado === 'finalizada' ? (
-          <a
-            href={`${API_URL}/generarFactura/${ultimaReserva.id_reserva}`}
-            download
-            className="btn btn-outline-primary mt-3"
-          >
-            🧾 Descargar Factura
-          </a>
 
-        ) : null}
 
       </div>
 
