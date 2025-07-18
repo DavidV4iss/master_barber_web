@@ -67,10 +67,10 @@ export default function Index() {
             <NavbarIndex />
 
             <div className="video-hero">
-                <video src="video2.mp4" autoPlay loop muted playsInline className="video-bg" />
+                <video src="video2.mp4" autoPlay loop muted playsInline className="video-bg " />
                 <div className="video-overlay "></div>
 
-                <div className="hero-content container text-white mt-4">
+                <div className="hero-content container text-white mt-5">
                     <h1 className="display-1 cesar fw-bold ">
                         Descubre la <p> Excelencia en Estilo</p>MASTER BARBER VIP:
                     </h1>
@@ -79,7 +79,7 @@ export default function Index() {
                         Somos una barbería dedicada al cuidado masculino, ofreciendo cortes de cabello, afeitados clásicos y modernos, tratamientos capilares y un ambiente cómodo pensado para ti. Nuestro equipo de barberos profesionales combina técnica, estilo y atención personalizada para que salgas con tu mejor versión.
                     </p>
 
-                    <h1 className="antonparabackend fw-bold mt-5 pt-5">
+                    <h1 className="antonparabackend fw-bold pt-2 mb-5">
                         <span className="text-danger">"DONDE LA BARBERIA </span>
                         <span className="text-warning">SE CONVIERTE EN ARTE"</span>
                     </h1>

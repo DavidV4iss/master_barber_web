@@ -57,7 +57,7 @@ export default function CalificacionesAdmin() {
     return (
         <div className='container text-white '>
             {calificaciones.length === 0 ? (
-                <p className="text-center text-danger">No hay calificaciones disponibles.</p>
+                <p className="text-center text-light fs-5">😕 No hay calificaciones para mostrar.</p>
             ) : (
                 <Slider {...settings}>
                     {calificaciones.map((calificacion) => {
