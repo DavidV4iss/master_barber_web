@@ -142,6 +142,8 @@ export default function PerfilBarber() {
                   transition: "opacity 0.5s ease-in-out",
                   opacity: imagePreview ? 0.9 : 1,
                 }}
+                onError={e => { e.target.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png"; }}
+
               />
 
             </div>

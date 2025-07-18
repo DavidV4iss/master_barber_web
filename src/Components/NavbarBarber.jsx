@@ -94,6 +94,8 @@ export default function NavbarBarber() {
                 alt="Imagen de perfil"
                 className="img-fluid rounded-circle contenido3 "
                 style={{ width: "40px", height: "40px", objectFit: "cover" }}
+                onError={e => { e.target.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png"; }}
+
               />
             </button>
             <ul class="dropdown-menu dropdown-menu-end bg-dark">

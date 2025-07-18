@@ -28,7 +28,7 @@ export default function GestionReservas() {
 
     const handleUpdateEstado = (id, nuevoEstado) => {
         setLoadingAction(id + nuevoEstado);
-        API.patch(`/UpdateReservasEstado/${id}`, { estado: nuevoEstado })
+        API.put(`/UpdateReservasEstado/${id}`, { estado: nuevoEstado })
             .then(() => {
                 setReservas(prev => prev.map(r =>
                     r.id_reserva === id ? { ...r, estado: nuevoEstado } : r
@@ -71,7 +71,7 @@ export default function GestionReservas() {
 
     return (
         <div className="gestion-reservas">
-                <NavbarBarber />
+            <NavbarBarber />
             <div className="container">
                 <h2 className="mt-5 cesar">Hola <span className="cesar">{Barber.nombre_usuario}</span> 👋</h2>
                 <div className="row g-4">
@@ -87,7 +87,10 @@ export default function GestionReservas() {
                                     <div className="card-body d-flex flex-column">
                                         <div className="text-center mb-3">
                                             {cliente.foto && (
-                                                <img src={cliente.foto} alt="Cliente" className="cliente-img" />
+                                                <img src={cliente.foto} alt="Cliente" className="cliente-img"
+                                                    onError={e => { e.target.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png"; }}
+                                                />
+
                                             )}
                                             <h5 className="mt-2 cesar">{cliente.nombre}</h5>
                                         </div>
