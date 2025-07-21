@@ -98,6 +98,7 @@ export default function CalificacionesAdmin() {
                             src={`${API_URL}/perfil/${usuarios.find(user => user.id_usuario === selectedCalificacion.usuario_id)?.Foto}`}
                             className="img-fluid rounded-circle mb-3"
                             style={{ width: "90px", height: "90px", objectFit: "cover", border: "3px solid #dc3545" }}
+                            onError={(e) => (e.target.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png")}
                         />
                         <p className='mt-3 fs-5'>" {selectedCalificacion.comentario} "</p>
                         <p className='fs-4 text-warning'>{"⭐".repeat(selectedCalificacion.puntuacion)}</p>
