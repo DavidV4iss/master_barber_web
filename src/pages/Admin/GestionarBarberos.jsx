@@ -319,7 +319,7 @@ export default function GestionarBarberos() {
                 </div>
                 <div className="mb-3">
                   <label className="col-form-label text-white">Nombre Barbero</label>
-                  <input required type="text" className="form-control bg-dark text-white" name='nombre' onChange={handleChange} placeholder='Escriba un Nombre' />
+                  <input required type="text" className="form-control bg-dark text-white" name='nombre_usuario' onChange={handleChange} placeholder='Escriba un Nombre' />
                 </div>
                 <div className="mb-3">
                   <label className="col-form-label text-white">Email</label>
