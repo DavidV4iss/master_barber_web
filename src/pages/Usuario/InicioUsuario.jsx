@@ -6,7 +6,6 @@ import ReservaCliente from './ReservaCliente';
 import CalificacionesUser from '../../Components/CalificacionesUser';
 import 'animate.css';
 import API from '../../api/api';
-import NotaVoz from './NotaVoz';
 const API_URL = process.env.API_URL || "http://localhost:8080";
 
 
