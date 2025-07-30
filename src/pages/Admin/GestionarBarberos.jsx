@@ -32,7 +32,7 @@ export default function GestionarBarberos() {
     e.preventDefault();
     try {
       const formData = new FormData();
-      formData.append('nombre_usuario', barbero.nombre_usuario);
+      formData.append('nombre', barbero.nombre);
       formData.append('email', barbero.email);
       formData.append('contrasena', barbero.contrasena);
       formData.append('descripcion', barbero.descripcion);
