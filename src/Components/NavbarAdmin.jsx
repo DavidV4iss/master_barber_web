@@ -27,8 +27,8 @@ export default function NavbarAdmin() {
       try {
         const res = await API.get(`/traerUsuario/${email}`);
         setAdmin(res.data[0]);
-        if (res.data[0].Foto) {
-          setImagePreview(`${API_URL}/perfil/${res.data[0].Foto}`);
+        if (res.data[0].foto) {
+          setImagePreview(`${API_URL}/perfil/${res.data[0].foto}`);
         }
       } catch (err) {
         console.log("Error al obtener los datos:", err);

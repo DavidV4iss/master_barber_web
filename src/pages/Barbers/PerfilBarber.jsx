@@ -24,8 +24,8 @@ export default function PerfilBarber() {
       try {
         const res = await API.get(`/traerUsuario/${email}`);
         setBarber(res.data[0]);
-        if (res.data[0].Foto) {
-          setImagePreview(`${API_URL}/imagesBarbero/${res.data[0].Foto}`);
+        if (res.data[0].foto) {
+          setImagePreview(`${API_URL}/imagesBarbero/${res.data[0].foto}`);
         }
       } catch (err) {
         console.log("Error al obtener los datos:", err);
@@ -131,7 +131,7 @@ export default function PerfilBarber() {
           <div className="row justify-content-center align-items-center">
             <div className="col col-lg-6 bi-text-lg-center ">
               <img
-                src={imagePreview || `${API_URL}/imagesBarbero/${barber.Foto}`}
+                src={imagePreview || `${API_URL}/imagesBarbero/${barber.foto}`}
                 alt="Imagen de perfil"
                 className={`img-fluid rounded-circle contenido3 zoomhover2 ${imagePreview ? "fade-in" : ""
                   }`}
@@ -184,7 +184,7 @@ export default function PerfilBarber() {
                 </div>
                 <div className=" container row mt-3">
                   <p className="text-white antonparabackend">
-                    Actualizar Foto De Perfil
+                    Actualizar foto De Perfil
                   </p>
                   <div className="input-group">
                     <input

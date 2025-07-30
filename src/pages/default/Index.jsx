@@ -314,8 +314,8 @@ export default function Index() {
                                             style={{ width: "100%", maxWidth: "360px", cursor: "pointer", overflow: "hidden", transition: "all 0.4s ease" }}
                                         >
                                             <img
-                                                src={`${API_URL}/imagesBarbero/${barbero.Foto}`}
-                                                alt={`Foto de ${barbero.nombre_usuario}`}
+                                                src={`${API_URL}/imagesBarbero/${barbero.foto}`}
+                                                alt={`foto de ${barbero.nombre_usuario}`}
                                                 className="img-fluid rounded-top"
                                                 style={{ height: "360px", objectFit: "cover" }}
                                             />

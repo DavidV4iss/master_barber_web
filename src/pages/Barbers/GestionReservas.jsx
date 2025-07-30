@@ -55,7 +55,7 @@ export default function GestionReservas() {
         const cliente = clientes.find(c => c.id_usuario === id);
         return cliente ? {
             nombre: cliente.nombre_usuario,
-            foto: `${API_URL}/perfil/${cliente.Foto}`
+            foto: `${API_URL}/perfil/${cliente.foto}`
         } : { nombre: 'Cliente desconocido', foto: '' };
     };
 

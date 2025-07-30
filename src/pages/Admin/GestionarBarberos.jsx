@@ -199,7 +199,7 @@ export default function GestionarBarberos() {
 
   const openEditModal = (barbero) => {
     setBarberoEdit(barbero);
-    setImagePreviewEdit(`${API_URL}/imagesBarbero/${barbero.Foto}`);
+    setImagePreviewEdit(`${API_URL}/imagesBarbero/${barbero.foto}`);
   };
 
   return (
@@ -237,7 +237,7 @@ export default function GestionarBarberos() {
                       <td className='w-25 text-center p-5'>{barbero.nombre_usuario}</td>
                       <td className='w-25 text-center p-5'>{barbero.email}</td>
                       <td className='w-25 text-center p-5'>{barbero.descripcion}</td>
-                      <td><img src={`${API_URL}/imagesBarbero/${barbero.Foto}`} className='img-fluid zoomhover2' alt="" /></td>
+                      <td><img src={`${API_URL}/imagesBarbero/${barbero.foto}`} className='img-fluid zoomhover2' alt="" /></td>
                       <td>
                         <div className="d-flex justify-content-center mt-5 mx-5">
                           <button type="button" className="btn btn-outline-warning me-5" onClick={() => openEditModal(barbero)} data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">

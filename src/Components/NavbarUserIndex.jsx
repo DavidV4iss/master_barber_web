@@ -74,8 +74,8 @@ export default function NavbarUserIndex() {
       try {
         const res = await API.get(`/traerUsuario/${email}`);
         setUser(res.data[0]);
-        if (res.data[0].Foto) {
-          setImagePreview(`${API_URL}/perfil/${res.data[0].Foto}`);
+        if (res.data[0].foto) {
+          setImagePreview(`${API_URL}/perfil/${res.data[0].foto}`);
         }
       } catch (err) {
         console.log("Error al obtener los datos:", err);
@@ -243,7 +243,7 @@ export default function NavbarUserIndex() {
             >
               <img
                 src={imagePreview}
-                alt='Foto de Perfil'
+                alt='foto de Perfil'
                 className="img-fluid rounded-circle contenido3 text-white zoomhover2 fade-in"
                 style={{ width: "50px", height: "50px", objectFit: "cover" }}
                 onError={e => { e.target.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png"; }}

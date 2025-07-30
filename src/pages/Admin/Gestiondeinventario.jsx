@@ -73,7 +73,7 @@ export default function Gestiondeinventario() {
     }
 
     const calcularTotal = () => {
-        return venta.reduce((total, item) => total + (item.PrecioUnitario * item.cantidad), 0);
+        return venta.reduce((total, item) => total + (item.preciounitario * item.cantidad), 0);
     };
 
     const handleSubmit = async () => {
@@ -132,10 +132,10 @@ export default function Gestiondeinventario() {
             doc.text("No hay ventas en este rango.", 10, y);
         } else {
             ventasAgrupadasArray.forEach((venta, index) => {
-                doc.text(`${index + 1}. Producto: ${venta.nombre}, Cantidad: ${venta.cantidad}, Total: $${(venta.PrecioUnitario * venta.cantidad).toFixed(2)}`, 10, y);
+                doc.text(`${index + 1}. Producto: ${venta.nombre}, Cantidad: ${venta.cantidad}, Total: $${(venta.preciounitario * venta.cantidad).toFixed(2)}`, 10, y);
                 y += 10;
             });
-            const total = ventasAgrupadasArray.reduce((acc, item) => acc + item.PrecioUnitario * item.cantidad, 0);
+            const total = ventasAgrupadasArray.reduce((acc, item) => acc + item.preciounitario * item.cantidad, 0);
             doc.text(`Total General: $${total.toFixed(2)}`, 10, y + 10);
         }
 
@@ -169,14 +169,14 @@ export default function Gestiondeinventario() {
                                     >
                                         <div className="card bg-dark h-100 shadow rounded-4">
                                             <img
-                                                src={`${API_URL}/ImagesInventario/${item.Foto}`}
+                                                src={`${API_URL}/ImagesInventario/${item.foto}`}
                                                 alt={item.nombre}
                                                 className="card-img-top rounded-top-4 shadow"
                                                 style={{ height: '200px', objectFit: 'cover' }}
                                             />
                                             <div className="card-body text-center">
                                                 <h5 className="text-warning bebas">{item.nombre}</h5>
-                                                <p className="text-white">${item.PrecioUnitario}</p>
+                                                <p className="text-white">${item.preciounitario}</p>
                                                 <p className="text-success bebas">{item.cantidad} Unidades</p>
                                             </div>
                                         </div>
@@ -225,7 +225,7 @@ export default function Gestiondeinventario() {
                                                 <td>{item.cantidad}</td>
                                                 <td>{item.id_producto}</td>
                                                 <td>{item.nombre}</td>
-                                                <td>${item.PrecioUnitario}</td>
+                                                <td>${item.preciounitario}</td>
                                             </tr>
                                         ))
                                     ) : (

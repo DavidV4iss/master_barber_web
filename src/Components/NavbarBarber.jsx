@@ -27,8 +27,8 @@ export default function NavbarBarber() {
       try {
         const res = await API.get(`/traerUsuario/${email}`);
         setBarber(res.data[0]);
-        if (res.data[0].Foto) {
-          setImagePreview(`${API_URL}/imagesBarbero/${res.data[0].Foto}`);
+        if (res.data[0].foto) {
+          setImagePreview(`${API_URL}/imagesBarbero/${res.data[0].foto}`);
         }
       } catch (err) {
         console.log("Error al obtener los datos:", err);
@@ -90,7 +90,7 @@ export default function NavbarBarber() {
                 {barber.nombre_usuario}
               </div>
               <img
-                src={`${API_URL}/imagesBarbero/${barber.Foto}`}
+                src={`${API_URL}/imagesBarbero/${barber.foto}`}
                 alt="Imagen de perfil"
                 className="img-fluid rounded-circle contenido3 "
                 style={{ width: "40px", height: "40px", objectFit: "cover" }}

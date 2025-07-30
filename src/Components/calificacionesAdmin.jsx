@@ -70,7 +70,7 @@ export default function CalificacionesAdmin() {
                                 >
                                     <div className="card-body text-center">
                                         <img
-                                            src={`${API_URL}/perfil/${usuario?.Foto}`}
+                                            src={`${API_URL}/perfil/${usuario?.foto}`}
                                             className="img-fluid rounded-circle mb-3 shadow mx-auto d-block"
                                             style={{ width: "120px", height: "120px", objectFit: "cover", border: "4px solid #dc3545" }}
                                             onError={(e) => (e.target.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png")}
@@ -95,7 +95,7 @@ export default function CalificacionesAdmin() {
                     </Modal.Header>
                     <Modal.Body className='bg-dark text-white text-center '>
                         <img
-                            src={`${API_URL}/perfil/${usuarios.find(user => user.id_usuario === selectedCalificacion.usuario_id)?.Foto}`}
+                            src={`${API_URL}/perfil/${usuarios.find(user => user.id_usuario === selectedCalificacion.usuario_id)?.foto}`}
                             className="img-fluid rounded-circle mb-3"
                             style={{ width: "90px", height: "90px", objectFit: "cover", border: "3px solid #dc3545" }}
                             onError={(e) => (e.target.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png")}

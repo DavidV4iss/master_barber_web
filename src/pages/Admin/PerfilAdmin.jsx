@@ -23,8 +23,8 @@ export default function PerfilAdmin() {
       try {
         const res = await API.get(`/traerUsuario/${email}`);
         setAdmin(res.data[0]);
-        if (res.data[0].Foto) {
-          setImagePreview(`${API_URL}/perfil/${res.data[0].Foto}`);
+        if (res.data[0].foto) {
+          setImagePreview(`${API_URL}/perfil/${res.data[0].foto}`);
         }
       } catch (err) {
         console.error('Error al obtener los datos:', err);
@@ -110,8 +110,8 @@ export default function PerfilAdmin() {
       setFile(null);
       const res = await API.get(`/traerUsuario/${email}`);
       setAdmin(res.data[0]);
-      if (res.data[0].Foto) {
-        setImagePreview(`${API_URL}/perfil/${res.data[0].Foto}`);
+      if (res.data[0].foto) {
+        setImagePreview(`${API_URL}/perfil/${res.data[0].foto}`);
       } else {
         setImagePreview("https://cdn-icons-png.flaticon.com/512/149/149071.png");
       }
@@ -187,7 +187,7 @@ export default function PerfilAdmin() {
                 </div>
 
                 <div className="container row mt-3">
-                  <p className="text-white antonparabackend">Actualizar Foto De Perfil</p>
+                  <p className="text-white antonparabackend">Actualizar foto De Perfil</p>
                   <div className="input-group">
                     <input
                       name="file"

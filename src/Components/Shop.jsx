@@ -107,7 +107,7 @@ export default function Shop() {
                                     onClick={() => setSelectedProducto(producto)}
                                 >
                                     <img
-                                        src={`${API_URL}/ImagesInventario/${producto.Foto}`}
+                                        src={`${API_URL}/ImagesInventario/${producto.foto}`}
                                         className="card-img-top"
                                         alt={producto.nombre}
                                         style={{ height: "180px", objectFit: "cover" }}
@@ -119,7 +119,7 @@ export default function Shop() {
 
                                     <div className="card-body text-center">
                                         <h6 className="text-warning mb-1 cesar">{producto.nombre}</h6>
-                                        <p className="small mb-0">{formatPrice(producto.PrecioUnitario)}</p>
+                                        <p className="small mb-0">{formatPrice(producto.preciounitario)}</p>
                                     </div>
                                 </div>
                             </div>
@@ -143,13 +143,13 @@ export default function Shop() {
                                 onClick={() => setSelectedProducto(null)}
                             ></button>
                             <img
-                                src={`${API_URL}/ImagesInventario/${selectedProducto.Foto}`}
+                                src={`${API_URL}/ImagesInventario/${selectedProducto.foto}`}
                                 alt={selectedProducto.nombre}
                                 className="img-fluid rounded mb-3"
                             />
                             <h4 className="text-warning text-center cesar fs-5">{selectedProducto.nombre}</h4>
                             <p className="text-light"> <strong>Descripción: </strong>{selectedProducto.descripcion_P}</p>
-                            <p><strong>Precio:</strong> {formatPrice(selectedProducto.PrecioUnitario)}</p>
+                            <p><strong>Precio:</strong> {formatPrice(selectedProducto.preciounitario)}</p>
                             <p><strong>Stock:</strong> {selectedProducto.cantidad} unidad(es)</p>
                             <button className="btn btn-outline-warning w-100 mt-3" onClick={() => setSelectedProducto(null)}>Cerrar</button>
                         </div>

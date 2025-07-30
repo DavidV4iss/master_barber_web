@@ -19,7 +19,7 @@ export default function Inventario() {
         proveedor: '',
         fecha_venta: '',
         foto: null,
-        PrecioUnitario: ''
+        preciounitario: ''
     });
 
     const [productoEditar, setProductoEditar] = useState({
@@ -30,7 +30,7 @@ export default function Inventario() {
         proveedor: '',
         fecha_venta: '',
         foto: null,
-        PrecioUnitario: ''
+        preciounitario: ''
     });
 
     const [categorias, setCategorias] = useState([]);
@@ -49,7 +49,7 @@ export default function Inventario() {
             formData.append('proveedor', producto.proveedor);
             formData.append('fecha_venta', producto.fecha_venta);
             formData.append('foto', producto.foto);
-            formData.append('PrecioUnitario', producto.PrecioUnitario);
+            formData.append('preciounitario', producto.preciounitario);
 
             const res = await API.post(`/CreateInventario`, formData);
             if (res.status === 200) {
@@ -88,7 +88,7 @@ export default function Inventario() {
             formData.append('proveedor', productoEditar.proveedor);
             formData.append('fecha_venta', productoEditar.fecha_venta);
             formData.append('foto', productoEditar.foto);
-            formData.append('PrecioUnitario', productoEditar.PrecioUnitario);
+            formData.append('preciounitario', productoEditar.preciounitario);
 
             const res = await API.put(`/UpdateInventario/${productoEditar.id_producto}`, formData);
             if (res.status === 200) {
@@ -221,7 +221,7 @@ export default function Inventario() {
     const openEditModal = (item) => {
         setProductoEditar({
             ...item,
-            foto: item.Foto
+            foto: item.foto
         });
         setImagePreviewEdit('');
     };
@@ -272,8 +272,8 @@ export default function Inventario() {
                                                 <td className='text-center'>{categorias.find(c => c.id_categoria_producto === item.id_categoria_producto)?.categoria}</td>
                                                 <td className='text-center'>{item.proveedor}</td>
                                                 <td className='text-center'>{item.fecha_venta}</td>
-                                                <td className='text-center'><img src={`${API_URL}/ImagesInventario/${item.Foto}`} className='img-fluid zoomhover2' style={{ width: '150px', height: '150px', objectFit: 'cover' }} /></td>
-                                                <td className='text-center'>{item.PrecioUnitario}</td>
+                                                <td className='text-center'><img src={`${API_URL}/ImagesInventario/${item.foto}`} className='img-fluid zoomhover2' style={{ width: '150px', height: '150px', objectFit: 'cover' }} /></td>
+                                                <td className='text-center'>{item.preciounitario}</td>
                                                 <td>
                                                     <div className="d-flex">
                                                         <button type="button" className="btn btn-outline-warning me-3" onClick={() => openEditModal(item)} data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
@@ -311,8 +311,8 @@ export default function Inventario() {
                                                         ? imagePreviewEdit
                                                         : productoEditar.foto && typeof productoEditar.foto === 'string'
                                                             ? `${API_URL}/ImagesInventario/${productoEditar.foto}`
-                                                            : productoEditar.Foto && typeof productoEditar.Foto === 'string'
-                                                                ? `${API_URL}/ImagesInventario/${productoEditar.Foto}`
+                                                            : productoEditar.foto && typeof productoEditar.foto === 'string'
+                                                                ? `${API_URL}/ImagesInventario/${productoEditar.foto}`
                                                                 : ''
                                                 }
                                                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
@@ -364,7 +364,7 @@ export default function Inventario() {
                                         </div>
                                         <div class="mb-3">
                                             <label for="recipient-name" class="col-form-label text-white  antonparabackend">Costo Total:</label>
-                                            <input value={productoEditar.PrecioUnitario} type="text" class="form-control bg-dark text-white" id="recipient-name" name='PrecioUnitario' onChange={handleChangeEdit} />
+                                            <input value={productoEditar.preciounitario} type="text" class="form-control bg-dark text-white" id="recipient-name" name='preciounitario' onChange={handleChangeEdit} />
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -436,7 +436,7 @@ export default function Inventario() {
                                             </div>
                                             <div class="mb-3 mt-3">
                                                 <label for="recipient-name" class="col-form-label text-white  antonparabackend">Costo Total</label>
-                                                <input type="text" class="form-control bg-dark text-white" id="recipient-name" name='PrecioUnitario' onChange={handleChange} />
+                                                <input type="text" class="form-control bg-dark text-white" id="recipient-name" name='preciounitario' onChange={handleChange} />
                                             </div>
                                         </form>
                                     </div>
