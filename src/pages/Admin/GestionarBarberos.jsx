@@ -32,7 +32,7 @@ export default function GestionarBarberos() {
     e.preventDefault();
     try {
       const formData = new FormData();
-      formData.append('nombre', barbero.nombre);
+      formData.append('nombre_usuario', barbero.nombre);
       formData.append('email', barbero.email);
       formData.append('contrasena', barbero.contrasena);
       formData.append('descripcion', barbero.descripcion);
@@ -322,7 +322,7 @@ export default function GestionarBarberos() {
                   <input required type="text" className="form-control bg-dark text-white" name='nombre' onChange={handleChange} placeholder='Escriba un Nombre' />
                 </div>
                 <div className="mb-3">
-                  <label  className="col-form-label text-white">Email</label>
+                  <label className="col-form-label text-white">Email</label>
                   <input required type="email" className="form-control bg-dark text-white" name='email' onChange={handleChange} placeholder='Escriba un Email' />
                 </div>
                 <label className="col-form-label text-white">Contraseña</label>
