@@ -272,16 +272,16 @@ export default function GestionarBarberos() {
                 </div>
                 <div className="modal-body">
                   <div className="mb-3">
-                    <label htmlFor="recipient-name" className="col-form-label text-white">Nombre Barbero</label>
-                    <input required type="text" className="form-control bg-dark text-white" pattern='^[A-Za-z\s]+$' id="recipient-name" value={barberoEdit.nombre_usuario} name='nombre_usuario' onChange={handleChangeEdit} placeholder='Escriba un nombre' />
+                    <label id='nombre-barbero' className="col-form-label text-white">Nombre Barbero</label>
+                    <input required type="text" className="form-control bg-dark text-white" pattern='^[A-Za-z\s]+$' id="nombre-barbero" value={barberoEdit.nombre_usuario} name='nombre_usuario' onChange={handleChangeEdit} placeholder='Escriba un nombre' />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="recipient-name" className="col-form-label text-white">Email</label>
-                    <input required type="email" className="form-control bg-dark text-white" id="recipient-name" value={barberoEdit.email} name='email' onChange={handleChangeEdit} placeholder='Email' />
+                    <label className="col-form-label text-white">Email</label>
+                    <input required type="email" className="form-control bg-dark text-white" value={barberoEdit.email} name='email' onChange={handleChangeEdit} placeholder='Email' />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="recipient-name" className="col-form-label text-white">Descripcion</label>
-                    <input required type="text" className="form-control bg-dark text-white" id="recipient-name" value={barberoEdit.descripcion} name='descripcion' onChange={handleChangeEdit} placeholder='Escriba una Descripcion' />
+                    <label className="col-form-label text-white">Descripcion</label>
+                    <input required type="text" className="form-control bg-dark text-white" value={barberoEdit.descripcion} name='descripcion' onChange={handleChangeEdit} placeholder='Escriba una Descripcion' />
                   </div>
                   <p className="text-white antonparabackend"> Imagen Del Barbero</p>
                   <div className="input-group">
@@ -290,7 +290,6 @@ export default function GestionarBarberos() {
                       accept="image/*"
                       type="file"
                       className="form-control bg-dark text-white"
-                      id="inputGroupFile04"
                       onChange={handleFileChangeEdit}
                     />
                   </div>
@@ -319,16 +318,16 @@ export default function GestionarBarberos() {
                   </div>
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="recipient-name" className="col-form-label text-white">Nombre Barbero</label>
-                  <input required type="text" className="form-control bg-dark text-white" id="recipient-name" name='nombre' onChange={handleChange} placeholder='Escriba un Nombre' />
+                  <label className="col-form-label text-white">Nombre Barbero</label>
+                  <input required type="text" className="form-control bg-dark text-white" name='nombre' onChange={handleChange} placeholder='Escriba un Nombre' />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="recipient-name" className="col-form-label text-white">Email</label>
-                  <input required type="email" className="form-control bg-dark text-white" id="recipient-name" name='email' onChange={handleChange} placeholder='Escriba un Email' />
+                  <label  className="col-form-label text-white">Email</label>
+                  <input required type="email" className="form-control bg-dark text-white" name='email' onChange={handleChange} placeholder='Escriba un Email' />
                 </div>
-                <label htmlFor="recipient-name" className="col-form-label text-white">Contraseña</label>
+                <label className="col-form-label text-white">Contraseña</label>
                 <div className="mb-3 input-group">
-                  <input required className="form-control bg-dark text-white" id="recipient-name" name='contrasena' onChange={handleChange} placeholder='Escriba una Contraseña' type={isPasswordVisible ? "text" : "password"} />
+                  <input required className="form-control bg-dark text-white" name='contrasena' onChange={handleChange} placeholder='Escriba una Contraseña' type={isPasswordVisible ? "text" : "password"} />
                   <button
                     type="button"
                     onClick={() => setIsPasswordVisible((prev) => !prev)}
@@ -338,8 +337,8 @@ export default function GestionarBarberos() {
                   </button>
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="recipient-name" className="col-form-label text-white">Descripcion</label>
-                  <input required type="text" className="form-control bg-dark text-white" id="recipient-name" name='descripcion' onChange={handleChange} placeholder='Escriba una Descripcion' />
+                  <label className="col-form-label text-white">Descripcion</label>
+                  <input required type="text" className="form-control bg-dark text-white" name='descripcion' onChange={handleChange} placeholder='Escriba una Descripcion' />
                 </div>
                 <p className="text-white antonparabackend"> Imagen Del Barbero</p>
                 <div className="input-group">
@@ -349,7 +348,6 @@ export default function GestionarBarberos() {
                     accept="image/*"
                     type="file"
                     className="form-control bg-dark text-white "
-                    id="inputGroupFile04"
                     onChange={handleFileChange}
                   />
                 </div>
