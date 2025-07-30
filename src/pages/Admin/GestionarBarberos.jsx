@@ -272,7 +272,7 @@ export default function GestionarBarberos() {
                 </div>
                 <div className="modal-body">
                   <div className="mb-3">
-                    <label id='nombre-barbero' className="col-form-label text-white">Nombre Barbero</label>
+                    <label className="col-form-label text-white">Nombre Barbero</label>
                     <input required type="text" className="form-control bg-dark text-white" pattern='^[A-Za-z\s]+$' id="nombre-barbero" value={barberoEdit.nombre_usuario} name='nombre_usuario' onChange={handleChangeEdit} placeholder='Escriba un nombre' />
                   </div>
                   <div className="mb-3">
