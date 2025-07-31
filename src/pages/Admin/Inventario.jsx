@@ -273,11 +273,7 @@ export default function Inventario() {
                                                 <td className='text-center'>{item.proveedor}</td>
                                                 <td className='text-center'>{item.fecha_venta}</td>
                                                 <td className='text-center'>
-                                                    <img
-                                                        src={item.foto || '/img/default-user.jpg'}
-                                                        className='img-fluid zoomhover2'
-                                                        alt="Barbero"
-                                                    />
+                                                    <img src={item.foto} alt="Imagen" style={{ width: '100px', height: '100px' }} />
                                                 </td>
 
                                                 <td className='text-center'>{item.preciounitario}</td>
