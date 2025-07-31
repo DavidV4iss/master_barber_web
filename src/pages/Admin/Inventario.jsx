@@ -273,7 +273,17 @@ export default function Inventario() {
                                                 <td className='text-center'>{item.proveedor}</td>
                                                 <td className='text-center'>{item.fecha_venta}</td>
                                                 <td className='text-center'>
-                                                    <img src={item.foto} alt="Imagen" style={{ width: '100px', height: '100px' }} />
+                                                    <img
+                                                        src={
+                                                            item.foto
+                                                                ? `https://res.cloudinary.com/dnh1n2jbq/image/upload/${item.foto}`
+                                                                : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                                                        }
+                                                        alt="Imagen"
+                                                        style={{ width: '100px', height: '100px', objectFit: 'cover' }}
+                                                        className="img-fluid zoomhover2"
+                                                    />
+
                                                 </td>
 
                                                 <td className='text-center'>{item.preciounitario}</td>
@@ -312,16 +322,15 @@ export default function Inventario() {
                                                 src={
                                                     imagePreviewEdit
                                                         ? imagePreviewEdit
-                                                        : productoEditar.foto && typeof productoEditar.foto === 'string'
-                                                            ? `${productoEditar.foto}`
-                                                            : productoEditar.foto && typeof productoEditar.foto === 'string'
-                                                                ? `${productoEditar.foto}`
-                                                                : ''
+                                                        : productoEditar.foto
+                                                            ? `https://res.cloudinary.com/dnh1n2jbq/image/upload/${productoEditar.foto}`
+                                                            : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
                                                 }
                                                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                                 className='img-fluid text-white rounded'
                                                 alt="Imagen"
                                             />
+
                                         </div>
                                     </div>
                                     <div class="modal-body">
