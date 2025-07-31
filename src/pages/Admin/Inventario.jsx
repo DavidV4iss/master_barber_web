@@ -12,7 +12,7 @@ export default function Inventario() {
     const [inventario, setInventario] = useState([]);
     const [producto, setProducto] = useState({
         nombre: '',
-        descripcion_P: '',
+        descripcion_p: '',
         cantidad: '',
         id_categoria_producto: '',
         proveedor: '',
@@ -23,7 +23,7 @@ export default function Inventario() {
 
     const [productoEditar, setProductoEditar] = useState({
         nombre: '',
-        descripcion_P: '',
+        descripcion_p: '',
         cantidad: '',
         id_categoria_producto: '',
         proveedor: '',
@@ -42,7 +42,7 @@ export default function Inventario() {
         try {
             const formData = new FormData();
             formData.append('nombre', producto.nombre);
-            formData.append('descripcion_P', producto.descripcion_P);
+            formData.append('descripcion_p', producto.descripcion_p);
             formData.append('cantidad', producto.cantidad);
             formData.append('id_categoria_producto', producto.id_categoria_producto);
             formData.append('proveedor', producto.proveedor);
@@ -81,7 +81,7 @@ export default function Inventario() {
         try {
             const formData = new FormData();
             formData.append('nombre', productoEditar.nombre);
-            formData.append('descripcion_P', productoEditar.descripcion_P);
+            formData.append('descripcion_p', productoEditar.descripcion_p);
             formData.append('cantidad', productoEditar.cantidad);
             formData.append('id_categoria_producto', productoEditar.id_categoria_producto);
             formData.append('proveedor', productoEditar.proveedor);
@@ -327,7 +327,7 @@ export default function Inventario() {
                                         </div>
                                         <div class="mb-3">
                                             <label class="col-form-label text-white antonparabackend">Descripcion:</label>
-                                            <input type="text" value={productoEditar.descripcion_P} class="form-control bg-dark text-white" name='descripcion_P' onChange={handleChangeEdit} />
+                                            <input type="text" value={productoEditar.descripcion_p} class="form-control bg-dark text-white" name='descripcion_p' onChange={handleChangeEdit} />
                                         </div>
                                         <div class="mb-3">
                                             <label class="col-form-label text-white  antonparabackend">Cantidad:</label>
@@ -396,7 +396,7 @@ export default function Inventario() {
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label text-white  antonparabackend">Descripcion</label>
-                                                <input type="text" class="form-control bg-dark text-white" name='descripcion_P' onChange={handleChange} />
+                                                <input type="text" class="form-control bg-dark text-white" name='descripcion_p' onChange={handleChange} />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label text-white  antonparabackend">Cantidad</label>
