@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import API from '../../api/api';
-const API_URL = process.env.API_URL || "http://localhost:8080";
 
 export default function Inventario() {
     const [imagePreviewEdit, setImagePreviewEdit] = useState('');
@@ -267,12 +266,12 @@ export default function Inventario() {
                                             <tr key={item.id_producto}>
                                                 <th className='text-center'>{item.id_producto}</th>
                                                 <td className='text-center'>{item.nombre}</td>
-                                                <td className='text-center'>{item.descripcion_P}</td>
+                                                <td className='text-center'>{item.descripcion_p}</td>
                                                 <td className='text-center'>{item.cantidad}</td>
                                                 <td className='text-center'>{categorias.find(c => c.id_categoria_producto === item.id_categoria_producto)?.categoria}</td>
                                                 <td className='text-center'>{item.proveedor}</td>
                                                 <td className='text-center'>{item.fecha_venta}</td>
-                                                <td className='text-center'><img src={`${API_URL}/ImagesInventario/${item.foto}`} className='img-fluid zoomhover2' style={{ width: '150px', height: '150px', objectFit: 'cover' }} /></td>
+                                                <td className='text-center'><img src={item.foto} className='img-fluid zoomhover2' style={{ width: '150px', height: '150px', objectFit: 'cover' }} /></td>
                                                 <td className='text-center'>{item.preciounitario}</td>
                                                 <td>
                                                     <div className="d-flex">
@@ -310,9 +309,9 @@ export default function Inventario() {
                                                     imagePreviewEdit
                                                         ? imagePreviewEdit
                                                         : productoEditar.foto && typeof productoEditar.foto === 'string'
-                                                            ? `${API_URL}/ImagesInventario/${productoEditar.foto}`
+                                                            ? `${productoEditar.foto}`
                                                             : productoEditar.foto && typeof productoEditar.foto === 'string'
-                                                                ? `${API_URL}/ImagesInventario/${productoEditar.foto}`
+                                                                ? `${productoEditar.foto}`
                                                                 : ''
                                                 }
                                                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
@@ -324,14 +323,14 @@ export default function Inventario() {
                                     <div class="modal-body">
                                         <div class="mb-3">
                                             <label class="col-form-label text-white  antonparabackend ">Nombre:</label>
-                                            <input type="text" value={productoEditar.nombre} class="form-control bg-dark text-white"  name='nombre' onChange={handleChangeEdit} />
+                                            <input type="text" value={productoEditar.nombre} class="form-control bg-dark text-white" name='nombre' onChange={handleChangeEdit} />
                                         </div>
                                         <div class="mb-3">
                                             <label class="col-form-label text-white antonparabackend">Descripcion:</label>
-                                            <input type="text" value={productoEditar.descripcion_P} class="form-control bg-dark text-white"  name='descripcion_P' onChange={handleChangeEdit} />
+                                            <input type="text" value={productoEditar.descripcion_P} class="form-control bg-dark text-white" name='descripcion_P' onChange={handleChangeEdit} />
                                         </div>
                                         <div class="mb-3">
-                                            <label  class="col-form-label text-white  antonparabackend">Cantidad:</label>
+                                            <label class="col-form-label text-white  antonparabackend">Cantidad:</label>
                                             <input type="text" value={productoEditar.cantidad} class="form-control bg-dark text-white" name='cantidad' onChange={handleChangeEdit} />
                                         </div >
                                         <div class="mb-3">
@@ -345,11 +344,11 @@ export default function Inventario() {
                                         </div>
                                         <div class="mb-3">
                                             <label class="col-form-label text-white  antonparabackend">Proveedor:</label>
-                                            <input type="text" value={productoEditar.proveedor} class="form-control bg-dark text-white"  name='proveedor' onChange={handleChangeEdit} />
+                                            <input type="text" value={productoEditar.proveedor} class="form-control bg-dark text-white" name='proveedor' onChange={handleChangeEdit} />
                                         </div>
                                         <div class="mb-3">
-                                            <label  class="col-form-label text-white antonparabackend">Fecha Y Hora De Venta</label>
-                                            <input type="datetime-local" class="form-control bg-dark text-white"  name='fecha_venta' onChange={handleChangeEdit} />
+                                            <label class="col-form-label text-white antonparabackend">Fecha Y Hora De Venta</label>
+                                            <input type="datetime-local" class="form-control bg-dark text-white" name='fecha_venta' onChange={handleChangeEdit} />
                                         </div>
                                         <p className="text-white antonparabackend">Editar Imagen</p>
                                         <div className="input-group">
@@ -393,11 +392,11 @@ export default function Inventario() {
                                         <form>
                                             <div class="mb-3">
                                                 <label class="col-form-label text-white  antonparabackend">Nombre</label>
-                                                <input type="text" class="form-control bg-dark text-white"  name='nombre' onChange={handleChange} />
+                                                <input type="text" class="form-control bg-dark text-white" name='nombre' onChange={handleChange} />
                                             </div>
                                             <div class="mb-3">
-                                                <label  class="col-form-label text-white  antonparabackend">Descripcion</label>
-                                                <input type="text" class="form-control bg-dark text-white"  name='descripcion_P' onChange={handleChange} />
+                                                <label class="col-form-label text-white  antonparabackend">Descripcion</label>
+                                                <input type="text" class="form-control bg-dark text-white" name='descripcion_P' onChange={handleChange} />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="col-form-label text-white  antonparabackend">Cantidad</label>
