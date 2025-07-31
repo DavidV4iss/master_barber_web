@@ -12,7 +12,7 @@ export default function GestionarBarberos() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [barbero, setBarbero] = useState({
 
-    nombre: "",
+    nombre_usuario: "",
     email: "",
     contrasena: "",
     descripcion: "",
@@ -31,7 +31,7 @@ export default function GestionarBarberos() {
     e.preventDefault();
     try {
       const formData = new FormData();
-      formData.append('nombre_usuario', barbero.nombre);
+      formData.append('nombre_usuario', barbero.nombre_usuario);
       formData.append('email', barbero.email);
       formData.append('contrasena', barbero.contrasena);
       formData.append('descripcion', barbero.descripcion);
