@@ -4,7 +4,6 @@ import Swal from 'sweetalert2';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import API from '../../api/api';
-const API_URL = process.env.API_URL || "http://localhost:8080";
 
 export default function GestionarBarberos() {
   const [imagePreview, setImagePreview] = useState('');
@@ -198,8 +197,7 @@ export default function GestionarBarberos() {
   }, []);
 
   const openEditModal = (barbero) => {
-    setBarberoEdit(barbero);
-    setImagePreviewEdit(`${API_URL}/imagesBarbero/${barbero.foto}`);
+    setBarberoEdit(barbero); setImagePreviewEdit(barbero.foto || '/img/default-user.jpg');
   };
 
   return (
@@ -237,7 +235,12 @@ export default function GestionarBarberos() {
                       <td className='w-25 text-center p-5'>{barbero.nombre_usuario}</td>
                       <td className='w-25 text-center p-5'>{barbero.email}</td>
                       <td className='w-25 text-center p-5'>{barbero.descripcion}</td>
-                      <td><img src={`${API_URL}/imagesBarbero/${barbero.foto}`} className='img-fluid zoomhover2' alt="" /></td>
+                      <td><img
+                        src={barbero.foto || '/img/default-user.jpg'}
+                        className='img-fluid zoomhover2'
+                        alt="Barbero"
+                      />
+                      </td>
                       <td>
                         <div className="d-flex justify-content-center mt-5 mx-5">
                           <button type="button" className="btn btn-outline-warning me-5" onClick={() => openEditModal(barbero)} data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">
@@ -267,7 +270,12 @@ export default function GestionarBarberos() {
                 </div>
                 <div className="modal-body d-flex justify-content-center ">
                   <div className="card bg-dark" style={{ width: '10rem' }}>
-                    <img src={imagePreviewEdit || `${API_URL}/imagesBarbero/${barberoEdit.foto}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} className='img-fluid text-white rounded' alt="Imagen Barbero" />
+                    <img
+                      src={imagePreviewEdit || barberoEdit.foto}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      className='img-fluid text-white rounded'
+                      alt="Imagen Barbero"
+                    />
                   </div>
                 </div>
                 <div className="modal-body">
