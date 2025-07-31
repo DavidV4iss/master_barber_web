@@ -49,6 +49,7 @@ export default function Inventario() {
             formData.append('fecha_venta', producto.fecha_venta);
             formData.append('foto', producto.foto);
             formData.append('preciounitario', producto.preciounitario);
+            console.log("Estos Son Los Datos Recibidos:", formData);
 
             const res = await API.post(`/CreateInventario`, formData);
             if (res.status === 200) {
