@@ -447,25 +447,48 @@ export default function Index() {
                             <div className="col-md-3 mb-4 mt-5 mx-auto">
                                 <h6 className="fw-bold mb-2 text-white cesar">Contacto</h6>
                                 <p className="mb-1 text-white">Cra 4 Este #37b sur 38<br />Bogotá, Colombia</p>
-                                <p className="mb-1 text-white">Tel: (123) 456-7890</p>
-                                <p className="mb-1 text-white">Email: info@masterbarber.com</p>
-                                <p className="d-block text-primary">Para quejas y reclamos</p>
                             </div>
                             <div className="col-md-3 mb-4 mt-5">
                                 <h6 className="fw-bold mb-2 text-white cesar">Quiénes somos</h6>
                                 <ul className="list-unstyled">
-                                    <li><a href="#" className="text-white text-decoration-none">Nosotros</a></li>
-                                    <li><a href="#" className="text-white text-decoration-none">Servicios</a></li>
-                                    <li><a href="#" className="text-white text-decoration-none">Contacto</a></li>
-                                    <li><a href="#" className="text-white text-decoration-none">Blog</a></li>
+                                    <li><a href="#nosotros" className="text-white text-decoration-none">Nosotros</a></li>
+                                    <li><a href="#services" className="text-white text-decoration-none">Servicios</a></li>
+                                    <li><a href="#prices" className="text-white text-decoration-none">Precios</a></li>
                                 </ul>
                             </div>
                             <div className="col-md-2 mb-4 mt-5">
-                                <h6 className="fw-bold mb-2 text-white cesar">Políticas</h6>
-                                <ul className="list-unstyled">
-                                    <li><a href="#" className="text-white text-decoration-none">Política de Privacidad</a></li>
-                                    <li><a href="#" className="text-white text-decoration-none">Términos y Condiciones</a></li>
-                                </ul>
+                                <h6 className="fw-bold mb-2 text-white cesar ms-4">Políticas</h6>
+                                <div class="">
+                                    <div class="form-check">
+
+                                        <label class="form-check-label text-white " for="invalidCheck">
+                                            <a className="link-offset-1 text-decoration-none bebas" href="./Terminosycondiciones" data-bs-toggle="modal" data-bs-target="#exampleModal"> Terminos Y Condiciones </a>
+
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content bg-dark">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-2 bebas text-warning" id="exampleModalLabel">Terminos Y Condiciones</h1>
+                                                            <button type="button" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p> Autorizo en forma previa, expresa e informada, como Titular de los datos personales comunicados a Colombiana de Comercio S.A. (la “Compañía”), con NIT. 890.900.943-1, así como a todas sus Unidades de Negocio enunciadas en su Política de Privacidad, el tratamiento de mis datos personales para: (i) cumplir y hacer cumplir las obligaciones entre la Compañía y el titular del dato, tales como de garantía, servicio posventa, gestión de cobranza, entre otras; a través de la información de contacto que comunico, los cuales incluyen, pero sin limitarse, correo electrónico, número celular, entre otros (ii) comunicar información publicitaria y de mercadeo sobre los productos y servicios que ofrece, intermedia o comercializa la Compañía, a través de medios físicos, digitales y de nuevas tecnologías de la información, tales como redes sociales, mensajería instantánea, correo electrónico, mensajes de texto (SMS y/o MMS), aplicaciones web y/o plataformas virtuales asociadas a los datos personales que comunico; (iii) evaluar preferencias, experiencias sobre productos y hábitos de consumo; (iv) entregar información a fabricantes y/o importadores sobre los productos adquiridos para análisis de calidad; (v) fidelizar clientes; (vi) realizar acciones de inteligencia de negocios, prospectiva de clientes y tendencias de mercado.
+
+                                                                Los datos personales serán gestionados de forma segura y algunos tratamientos podrán ser realizados de manera directa o a través de encargados, quienes podrán estar domiciliados dentro o fuera de Colombia, en Europa y en países tales como los Estados Unidos, entre otros. El tratamiento de los datos personales por parte de la Compañía se realizará dando cumplimiento a la Política de Privacidad y Protección de Datos personales, publicada en www.alkosto.com.
+
+                                                                El titular de los datos personales tiene derecho a (i) conocer, actualizar y rectificar sus datos sobre información parcial, inexacta, incompleta, fraccionada o que induzca al error; (ii) solicitar prueba de esta autorización; (iii) ser informado(a) sobre el Tratamiento dado a sus datos; (iv) presentar quejas a la Superintendencia de Industria y Comercio; (v) revocar la autorización y solicitar la supresión de los datos suministrados en los términos de la Ley 1581 de 2012; (vi) acceder gratuitamente a los datos objeto de Tratamiento. Estos derechos podrán ser ejercidos a través de los siguientes canales: (i) Calle 11 N° 31 A – 42, Bogotá; (ii) datos.personales@corbeta.com.co.
+
+                                                                Asimismo, declaro que en caso tal de encontrarme suministrando información de un tercero, he obtenido de manera previa su consentimiento para la comunicación de sus datos personales a la Compañía. </p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="text-white border-2 btn btn-outline-warning" data-bs-dismiss="modal">Acepto El Tratamiento De Datos</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                             <div className="d-flex gap-3 mx-4">
                                 <a href="https://play.google.com/store" target="_blank" rel="noopener noreferrer">
