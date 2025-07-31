@@ -168,7 +168,11 @@ export default function Gestiondeinventario() {
                                     >
                                         <div className="card bg-dark h-100 shadow rounded-4">
                                             <img
-                                                src={item.foto}
+                                                src={
+                                                    item.foto
+                                                        ? `https://res.cloudinary.com/dnh1n2jbq/image/upload/${item.foto}`
+                                                        : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                                                }
                                                 alt={item.nombre}
                                                 className="card-img-top rounded-top-4 shadow"
                                                 style={{ height: '200px', objectFit: 'cover' }}
