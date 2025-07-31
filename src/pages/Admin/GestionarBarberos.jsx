@@ -343,7 +343,6 @@ export default function GestionarBarberos() {
                 <p className="text-white antonparabackend"> Imagen Del Barbero</p>
                 <div className="input-group">
                   <input
-                    required
                     name="foto"
                     accept="image/*"
                     type="file"
