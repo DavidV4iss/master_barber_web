@@ -25,7 +25,8 @@ export default function PerfilUser() {
         setUser(res.data[0]);
 
         if (res.data[0].foto) {
-          setImagePreview(`${API_URL}/perfil/${res.data[0].foto}`);
+          setImagePreview(`https://res.cloudinary.com/dnh1n2jbq/image/upload/${res.data[0].foto}`);
+
         }
       } catch (err) {
         console.log("Error al obtener los datos:", err);

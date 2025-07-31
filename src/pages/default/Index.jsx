@@ -5,7 +5,6 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import API from "../../api/api";
 import Shop from "../../Components/Shop";
-const API_URL = process.env.API_URL || "http://localhost:8080";
 
 export default function Index() {
     const [barberos, setBarberos] = useState([]);
@@ -314,7 +313,7 @@ export default function Index() {
                                             style={{ width: "100%", maxWidth: "360px", cursor: "pointer", overflow: "hidden", transition: "all 0.4s ease" }}
                                         >
                                             <img
-                                                src={`${API_URL}/imagesBarbero/${barbero.foto}`}
+                                                src={barbero.foto}
                                                 alt={`foto de ${barbero.nombre_usuario}`}
                                                 className="img-fluid rounded-top"
                                                 style={{ height: "360px", objectFit: "cover" }}

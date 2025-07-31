@@ -5,7 +5,6 @@ import 'animate.css';
 import calificacionesAdmin from '../../Components/calificacionesAdmin';
 import API from '../../api/api';
 import CalificacionesAdmin from '../../Components/calificacionesAdmin';
-const API_URL = process.env.API_URL || "http://localhost:8080";
 
 export default function InicioAdmin() {
 

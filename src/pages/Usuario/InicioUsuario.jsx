@@ -6,7 +6,6 @@ import ReservaCliente from './ReservaCliente';
 import CalificacionesUser from '../../Components/CalificacionesUser';
 import 'animate.css';
 import API from '../../api/api';
-const API_URL = process.env.API_URL || "http://localhost:8080";
 
 
 
@@ -34,10 +33,11 @@ export default function InicioUsuario() {
 
   const [ultimaReserva, setUltimaReserva] = useState(null);
 
+
   useEffect(() => {
     const fetchUltimaReserva = async () => {
       try {
-        const res = await API.get(`/GetReservasCliente/${id}`);
+        const res = await API.get(`/GetReservas/cliente/${id}`);
         const reservas = res.data;
 
         if (reservas.length > 0) {
@@ -103,6 +103,7 @@ export default function InicioUsuario() {
     }
   };
 
+
   return (
     <div>
       <NavbarUserIndex />
@@ -117,9 +118,6 @@ export default function InicioUsuario() {
               ¡Nos alegra verte de nuevo! Reserva tu cita fácilmente, califica nuestro servicio y disfruta de la mejor experiencia en barbería.
             </p>
           </div>
-
-          {/* <NotaVoz reservaId={ultimaReserva?.id_reserva || null} /> */}
-
 
 
 
@@ -138,14 +136,23 @@ export default function InicioUsuario() {
                 <ReservaCliente />
               )}
             </div>
-            {ultimaReserva?.estado === 'Aceptada' || ultimaReserva?.estado === 'finalizada' ? (
-              <a
-                href={`${API_URL}/generarFactura/${ultimaReserva.id_reserva}`}
-                download
-                className="btn btn-outline-warning mt-3"
-              >
-                🧾 Descargar Factura
-              </a>
+            {ultimaReserva ? (
+              ['aceptada', 'finalizada'].includes(ultimaReserva.estado?.toLowerCase()) && (
+                <a
+                  href={`https://master-barber-api.onrender.com/generarFactura/${ultimaReserva.id_reserva}`}
+                  download
+                  className="btn btn-outline-warning mt-3"
+                >
+                  🧾 Descargar Factura
+                </a>
+              )
+            ) : (
+              <p className="text-light mt-3">No tienes reservas registradas.</p>
+            )}
+
+            {ultimaReserva && ultimaReserva.estado?.toLowerCase() === 'rechazada' ? (
+              <p className="text-danger mt-3">Tu última reserva fue rechazada. Por favor, intenta nuevamente.</p>
+
 
             ) : null}
           </div>

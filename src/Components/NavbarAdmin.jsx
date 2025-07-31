@@ -3,9 +3,6 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import API from '../api/api';
-const API_URL = process.env.API_URL || "http://localhost:8080";
-
-
 
 
 export default function NavbarAdmin() {
@@ -28,7 +25,7 @@ export default function NavbarAdmin() {
         const res = await API.get(`/traerUsuario/${email}`);
         setAdmin(res.data[0]);
         if (res.data[0].foto) {
-          setImagePreview(`${API_URL}/perfil/${res.data[0].foto}`);
+          setImagePreview(`https://res.cloudinary.com/dnh1n2jbq/image/upload/${res.data[0].foto}`);
         }
       } catch (err) {
         console.log("Error al obtener los datos:", err);

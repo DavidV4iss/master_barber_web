@@ -200,7 +200,7 @@ export default function Reserva() {
                                                     </h5>
                                                     <div className='card-body d-flex flex-column align-items-center text-center'>
                                                         <img
-                                                            src={`${API_URL}/imagesBarbero/${barbero.foto}`}
+                                                            src={barbero.foto}
                                                             className='card-img-top rounded-3 img-fluid'
                                                             alt={barbero.nombre_usuario}
                                                             style={{ maxHeight: '200px', objectFit: 'cover' }}

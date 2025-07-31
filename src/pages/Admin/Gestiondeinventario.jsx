@@ -7,7 +7,6 @@ import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import GraficaVenta from '../../Components/GraficaVenta';
 import API from '../../api/api';
-const API_URL = process.env.API_URL || "http://localhost:8080";
 
 export default function Gestiondeinventario() {
     const [inventario, setInventario] = useState([]);
@@ -169,7 +168,7 @@ export default function Gestiondeinventario() {
                                     >
                                         <div className="card bg-dark h-100 shadow rounded-4">
                                             <img
-                                                src={`${API_URL}/ImagesInventario/${item.foto}`}
+                                                src={item.foto}
                                                 alt={item.nombre}
                                                 className="card-img-top rounded-top-4 shadow"
                                                 style={{ height: '200px', objectFit: 'cover' }}

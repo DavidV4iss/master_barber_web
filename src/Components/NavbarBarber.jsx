@@ -3,7 +3,6 @@ import axios from 'axios';
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import API from '../api/api';
-const API_URL = process.env.API_URL || "http://localhost:8080";
 
 
 
@@ -28,7 +27,7 @@ export default function NavbarBarber() {
         const res = await API.get(`/traerUsuario/${email}`);
         setBarber(res.data[0]);
         if (res.data[0].foto) {
-          setImagePreview(`${API_URL}/imagesBarbero/${res.data[0].foto}`);
+          setImagePreview(`https://res.cloudinary.com/dnh1n2jbq/image/upload/${res.data[0].foto}`);
         }
       } catch (err) {
         console.log("Error al obtener los datos:", err);
@@ -90,7 +89,7 @@ export default function NavbarBarber() {
                 {barber.nombre_usuario}
               </div>
               <img
-                src={`${API_URL}/imagesBarbero/${barber.foto}`}
+                src={barber.foto}
                 alt="Imagen de perfil"
                 className="img-fluid rounded-circle contenido3 "
                 style={{ width: "40px", height: "40px", objectFit: "cover" }}

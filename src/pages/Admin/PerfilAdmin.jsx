@@ -24,7 +24,7 @@ export default function PerfilAdmin() {
         const res = await API.get(`/traerUsuario/${email}`);
         setAdmin(res.data[0]);
         if (res.data[0].foto) {
-          setImagePreview(`${API_URL}/perfil/${res.data[0].foto}`);
+          setImagePreview(`https://res.cloudinary.com/dnh1n2jbq/image/upload/${res.data[0].foto}`);
         }
       } catch (err) {
         console.error('Error al obtener los datos:', err);

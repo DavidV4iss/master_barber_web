@@ -5,7 +5,6 @@ import { Modal, Button } from 'react-bootstrap';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Swal from 'sweetalert2';
-const API_URL = process.env.API_URL || "http://localhost:8080";
 import API from '../api/api';
 
 export default function CalificacionesUser({ userId }) {
@@ -105,6 +104,9 @@ export default function CalificacionesUser({ userId }) {
             <Slider {...settings}>
                 {calificaciones.map((calificacion) => {
                     const usuario = usuarios.find(u => u.id_usuario === calificacion.usuario_id);
+                    const fotoUrl = usuario?.foto
+                        ? `https://res.cloudinary.com/dnh1n2jbq/image/upload/${usuario.foto}`
+                        : "https://cdn-icons-png.flaticon.com/512/149/149071.png";
                     return (
                         <div key={calificacion.id} className="d-flex justify-content-center mt-5 mb-3">
                             <div
@@ -113,11 +115,12 @@ export default function CalificacionesUser({ userId }) {
                             >
                                 <div className="card-body text-center">
                                     <img
-                                        src={`${API_URL}/perfil/${usuario?.foto}`}
+                                        src={fotoUrl}
                                         className="img-fluid rounded-circle mb-3 shadow mx-auto d-block"
                                         style={{ width: "120px", height: "120px", objectFit: "cover", border: "4px solid #dc3545" }}
                                         onError={e => { e.target.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png" }}
                                     />
+
                                     <h4 className="fw-bold text-danger">{usuario?.nombre_usuario}</h4>
                                     <p className="mt-3 text-light fs-5">{calificacion.comentario || "Sin comentario solo calificación"}</p>
                                     <div className="text-warning fs-4">{"⭐".repeat(calificacion.puntuacion)}</div>
@@ -150,7 +153,7 @@ export default function CalificacionesUser({ userId }) {
                     </Modal.Header>
                     <Modal.Body className='bg-dark text-white text-center '>
                         <img
-                            src={`${API_URL}/perfil/${usuarios.find(user => user.id_usuario === selectedCalificacion.usuario_id)?.foto}`}
+                            src={`https://res.cloudinary.com/dnh1n2jbq/image/upload/${usuarios.find(user => user.id_usuario === selectedCalificacion.usuario_id)?.foto}`}
                             className="img-fluid rounded-circle mb-3"
                             style={{ width: "90px", height: "90px", objectFit: "cover", border: "3px solid #dc3545" }}
                         />

@@ -3,7 +3,6 @@ import NavbarBarber from '../../Components/NavbarBarber';
 import API from '../../api/api';
 import { CheckCircle, XCircle, Clock, Trash2 } from 'lucide-react';
 
-const API_URL = process.env.API_URL || "http://localhost:8080";
 
 export default function GestionReservas() {
     const [reservas, setReservas] = useState([]);
@@ -55,7 +54,7 @@ export default function GestionReservas() {
         const cliente = clientes.find(c => c.id_usuario === id);
         return cliente ? {
             nombre: cliente.nombre_usuario,
-            foto: `${API_URL}/perfil/${cliente.foto}`
+            foto: `${cliente.foto ? `https://res.cloudinary.com/dnh1n2jbq/image/upload/${cliente.foto}` : "https://cdn-icons-png.flaticon.com/512/149/149071.png"}`
         } : { nombre: 'Cliente desconocido', foto: '' };
     };
 

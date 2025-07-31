@@ -25,7 +25,7 @@ export default function PerfilBarber() {
         const res = await API.get(`/traerUsuario/${email}`);
         setBarber(res.data[0]);
         if (res.data[0].foto) {
-          setImagePreview(`${API_URL}/imagesBarbero/${res.data[0].foto}`);
+          setImagePreview(`https://res.cloudinary.com/dnh1n2jbq/image/upload/${res.data[0].foto}`);
         }
       } catch (err) {
         console.log("Error al obtener los datos:", err);
@@ -131,20 +131,31 @@ export default function PerfilBarber() {
           <div className="row justify-content-center align-items-center">
             <div className="col col-lg-6 bi-text-lg-center ">
               <img
-                src={imagePreview || `${API_URL}/imagesBarbero/${barber.foto}`}
+                src={
+                  file
+                    ? imagePreview
+                    : barber.foto
+                      ? barber.foto.startsWith("http")
+                        ? barber.foto
+                        : `https://res.cloudinary.com/dnh1n2jbq/image/upload/${barber.foto}`
+                      : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                }
                 alt="Imagen de perfil"
-                className={`img-fluid rounded-circle contenido3 zoomhover2 ${imagePreview ? "fade-in" : ""
-                  }`}
+                className={`img-fluid rounded-circle contenido3 zoomhover2 ${file ? "fade-in" : ""}`}
                 style={{
                   width: "250px",
                   height: "250px",
                   objectFit: "cover",
                   transition: "opacity 0.5s ease-in-out",
-                  opacity: imagePreview ? 0.9 : 1,
+                  opacity: file ? 0.9 : 1,
                 }}
-                onError={e => { e.target.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png"; }}
-
+                onError={(e) => {
+                  e.target.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+                }}
               />
+
+
+
 
             </div>
             <div className="col-12 col-lg-6 container">
