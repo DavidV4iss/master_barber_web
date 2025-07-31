@@ -272,7 +272,23 @@ export default function Inventario() {
                                                 <td className='text-center'>{categorias.find(c => c.id_categoria_producto === item.id_categoria_producto)?.categoria}</td>
                                                 <td className='text-center'>{item.proveedor}</td>
                                                 <td className='text-center'>{item.fecha_venta}</td>
-                                                <td className='text-center'><img src={item.foto} className='img-fluid zoomhover2' style={{ width: '150px', height: '150px', objectFit: 'cover' }} /></td>
+                                                <td className='text-center'>
+                                                    <img
+                                                        src={
+                                                            item.foto
+                                                                ? item.foto.startsWith("http")
+                                                                    ? item.foto
+                                                                    : `https://res.cloudinary.com/dnh1n2jbq/image/upload/${item.foto}`
+                                                                : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                                                        }
+                                                        className='img-fluid zoomhover2'
+                                                        style={{ width: '150px', height: '150px', objectFit: 'cover' }}
+                                                        onError={(e) => {
+                                                            e.target.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
+                                                        }}
+                                                    />
+                                                </td>
+
                                                 <td className='text-center'>{item.preciounitario}</td>
                                                 <td>
                                                     <div className="d-flex">
