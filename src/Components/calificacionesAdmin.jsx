@@ -92,11 +92,11 @@ export default function CalificacionesAdmin() {
                                             }}
                                             onError={(e) => (e.target.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png")}
                                         />
-                                        <h4 className="fw-bold text-danger">{usuario?.nombre_usuario || "Usuario desconocido"}</h4>
-                                        <p className="mt-3 text-light fs-5">
+                                        <h4 className="fw-bold text-danger cesar">{usuario?.nombre_usuario || "Usuario desconocido"}</h4>
+                                        <p className="mt-3 text-light fs-5 cesar">
                                             {calificacion.comentario || "Sin comentario solo calificación"}
                                         </p>
-                                        <div className="text-warning fs-4">
+                                        <div className="text-warning fs-4 cesar">
                                             {"⭐".repeat(calificacion.puntuacion)}
                                         </div>
                                     </div>
@@ -111,7 +111,7 @@ export default function CalificacionesAdmin() {
             {selectedCalificacion && (
                 <Modal show={show} onHide={handleClose} centered className='justify-content-center'>
                     <Modal.Header closeButton className='bg-dark text-white'>
-                        <Modal.Title className='text-danger bebas'>
+                        <Modal.Title className='text-danger cesar'>
                             Calificación de {usuarioModal?.nombre_usuario || "Usuario desconocido"}
                         </Modal.Title>
                     </Modal.Header>
@@ -122,7 +122,7 @@ export default function CalificacionesAdmin() {
                             style={{ width: "90px", height: "90px", objectFit: "cover", border: "3px solid #dc3545" }}
                             onError={(e) => (e.target.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png")}
                         />
-                        <p className='mt-3 fs-5'>" {selectedCalificacion.comentario} "</p>
+                        <p className='mt-3 fs-5 cesar'>"{selectedCalificacion.comentario} {selectedCalificacion.comentario ? "" :"Sin comentario solo calificación"}" </p>
                         <p className='fs-4 text-warning'>{"⭐".repeat(selectedCalificacion.puntuacion)}</p>
                     </Modal.Body>
                     <Modal.Footer className='bg-dark'>
