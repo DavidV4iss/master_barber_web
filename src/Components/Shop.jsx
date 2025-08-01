@@ -107,7 +107,11 @@ export default function Shop() {
                                     onClick={() => setSelectedProducto(producto)}
                                 >
                                     <img
-                                        src={`${API_URL}/ImagesInventario/${producto.foto}`}
+                                        src={
+                                            producto.foto
+                                                ? `https://res.cloudinary.com/dnh1n2jbq/image/upload/${producto.foto}`
+                                                : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                                        }
                                         className="card-img-top"
                                         alt={producto.nombre}
                                         style={{ height: "180px", objectFit: "cover" }}
@@ -143,9 +147,13 @@ export default function Shop() {
                                 onClick={() => setSelectedProducto(null)}
                             ></button>
                             <img
-                                src={`${API_URL}/ImagesInventario/${selectedProducto.foto}`}
+                                src={
+                                    selectedProducto.foto
+                                        ? `https://res.cloudinary.com/dnh1n2jbq/image/upload/${selectedProducto.foto}`
+                                        : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                                }
                                 alt={selectedProducto.nombre}
-                                className="img-fluid rounded mb-3"
+                                className="img-fluid rounded mb-3 w-50 mx-auto d-block"
                             />
                             <h4 className="text-warning text-center cesar fs-5">{selectedProducto.nombre}</h4>
                             <p className="text-light"> <strong>Descripción: </strong>{selectedProducto.descripcion_P}</p>
