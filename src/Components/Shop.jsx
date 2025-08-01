@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import API from '../api/api';
-const API_URL = process.env.API_URL || "http://localhost:8080";
 
 export default function Shop() {
     const [productos, setProductos] = useState([]);
@@ -9,6 +8,8 @@ export default function Shop() {
     const [search, setSearch] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("Todos");
     const [selectedProducto, setSelectedProducto] = useState(null);
+    const imgRef = useRef(null);
+    const containerRef = useRef(null);
     const scrollRef = useRef(null);
 
     useEffect(() => {
@@ -146,15 +147,50 @@ export default function Shop() {
                                 className="btn-close btn-close-white position-absolute top-2 end-2"
                                 onClick={() => setSelectedProducto(null)}
                             ></button>
-                            <img
-                                src={
-                                    selectedProducto.foto
+                            <div className="zoom-wrapper mx-auto my-3" ref={containerRef}
+                                onMouseMove={(e) => {
+                                    const img = imgRef.current;
+                                    const container = containerRef.current;
+
+                                    const rect = container.getBoundingClientRect();
+                                    const x = e.clientX - rect.left;
+                                    const y = e.clientY - rect.top;
+
+                                    const bgPosX = (x / rect.width) * 100;
+                                    const bgPosY = (y / rect.height) * 100;
+
+                                    img.style.backgroundPosition = `${bgPosX}% ${bgPosY}%`;
+                                }}
+                                onMouseEnter={() => {
+                                    const img = imgRef.current;
+                                    img.style.opacity = 1;
+                                }}
+                                onMouseLeave={() => {
+                                    const img = imgRef.current;
+                                    img.style.opacity = 0;
+                                }}
+                            >
+                                <div
+                                    ref={imgRef}
+                                    className="zoom-lens"
+                                    style={{
+                                        backgroundImage: `url(${selectedProducto.foto
+                                            ? `https://res.cloudinary.com/dnh1n2jbq/image/upload/${selectedProducto.foto}`
+                                            : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                                            })`,
+                                    }}
+                                ></div>
+                                <img
+                                    src={selectedProducto.foto
                                         ? `https://res.cloudinary.com/dnh1n2jbq/image/upload/${selectedProducto.foto}`
-                                        : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                                }
-                                alt={selectedProducto.nombre}
-                                className="img-fluid rounded mb-3 w-50 mx-auto d-block"
-                            />
+                                        : "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
+                                    alt={selectedProducto.nombre}
+                                    className="img-fluid rounded"
+                                    style={{ width: "70%", display: "block", margin: "0 auto" }}
+                                />
+                            </div>
+
+
                             <h4 className="text-warning text-center cesar fs-5">{selectedProducto.nombre}</h4>
                             <p className="text-light"> <strong>Descripción: </strong>{selectedProducto.descripcion_P}</p>
                             <p><strong>Precio:</strong> {formatPrice(selectedProducto.preciounitario)}</p>
