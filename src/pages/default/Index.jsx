@@ -507,7 +507,7 @@ export default function Index() {
                                 © {new Date().getFullYear()} Master Barber VIP. Todos los derechos reservados.
                             </div>
                             <div className="col-md-4 text-end text-white small cesar">
-                                Diseñado y desarrollado por <a href="#" className="text-decoration-none text-primary hover-link">Anonimo</a>
+                                Diseñado y desarrollado por <a href="https://www.facebook.com/fideljose.espitiagalvis" className="text-decoration-none text-primary hover-link">Anonimo</a>
                             </div>
                         </div>
                     </div>
