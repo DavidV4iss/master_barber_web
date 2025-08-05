@@ -1,8 +1,9 @@
 import axios from "axios";
 
+
 const API = axios.create({
-    baseURL: "https://master-barber-api.onrender.com",
-    timeout: 10000,
+    baseURL: process.env.API_URL,
+    timeout: process.env.API_TIMEOUT,
 });
 
 API.interceptors.request.use(async (config) => {
