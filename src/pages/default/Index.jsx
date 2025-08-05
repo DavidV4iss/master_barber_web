@@ -66,7 +66,7 @@ export default function Index() {
             <NavbarIndex />
 
             <div className="video-hero">
-                <video src="video2.mp4" autoPlay loop muted playsInline className="video-bg " />
+                <video src="https://res.cloudinary.com/dnh1n2jbq/video/upload/v1754403792/video2_a5wigx.mp4" autoPlay loop muted playsInline className="video-bg " />
                 <div className="video-overlay "></div>
 
                 <div className="hero-content container text-white mt-5">
